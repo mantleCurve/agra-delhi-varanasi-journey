@@ -7,7 +7,7 @@ window.TRIP = {
   subtitle: "9 nights · 10 days · three cities · a thousand stories",
   home: { id: "blr", name: "Bangalore", lat: 12.9716, lng: 77.5946, airport: { name: "Kempegowda Intl (BLR)", lat: 13.1989, lng: 77.7068 } },
   currency: { code: "INR", symbol: "₹", usd: 84 },
-  defaultMonth: 10, // October
+  defaultStart: "2026-11-28", // Sat 28 Nov → Mon 7 Dec: winter, smog season
   travellers: 2,
 
   cities: {
@@ -17,7 +17,8 @@ window.TRIP = {
       traffic: { speeds: [38,38,38,38,38,36,32,28,22,22,24,26,26,26,26,24,22,20,20,22,28,32,36,38], note: "Compact city. Cars stop 500 m short of the Taj; the last stretch is on foot or e-rickshaw. Fatehabad Road slows 17:00–20:00." },
       ride: { base: 40, perKm: 12, perMin: 1.2, min: 80, peak: 1.4 },
       climate: { hi: [19.3,25.3,30.3,37.4,39.3,38.2,33.3,32.5,32.6,32.0,27.1,21.8], lo: [7.9,12.3,16.8,22.8,25.9,28.1,26.6,26.0,25.0,20.9,14.9,10.3], rain: [27,14,24,2,21,144,209,240,214,26,2,14] },
-      aqi: [4,3,3,2,2,2,1,1,1,3,5,4] // 1 good … 5 very poor (seasonal typical)
+      aqi: [4,3,3,2,2,2,1,1,1,3,5,4], // 1 good … 5 very poor (seasonal typical)
+      air: { monthly: [230,170,150,160,150,120,70,60,80,150,240,210], fog: [3,2,0,0,0,0,0,0,0,0,2,3], note: "Agra sits downwind of Delhi's plume. Winter mornings bring smog and, from mid-December, dense fog that can hide the Taj until 09:00–10:00. Keep the afternoon free as a second attempt." }
     },
     delhi: { name: "Delhi", state: "NCT", lat: 28.6139, lng: 77.2090, accent: "#3aa7b8", days: "Days 3–6",
       hub: { name: "IGI Airport T3 (DEL)", lat: 28.5562, lng: 77.1000 },
@@ -27,7 +28,8 @@ window.TRIP = {
       traffic: { speeds: [42,42,42,42,40,36,30,24,18,18,20,24,26,26,25,24,20,16,15,16,22,30,36,40], note: "TomTom Traffic Index 2025 ranks Delhi 23rd most congested worldwide; average speed 21.9 km/h. Peaks 08:00–11:00 and 17:00–21:00. Metro beats cars on any hop over 10 km at peak." },
       ride: { base: 60, perKm: 14, perMin: 1.5, min: 100, peak: 1.7 },
       climate: { hi: [18.6,24.4,29.5,36.3,38.6,37.9,33.6,32.7,33.2,31.9,27.1,22.0], lo: [7.6,12.0,16.4,22.2,25.6,27.6,26.4,26.1,25.0,20.7,15.2,10.3], rain: [23,19,32,6,26,121,265,182,188,14,4,13] },
-      aqi: [5,4,3,3,3,2,1,1,2,4,5,5]
+      aqi: [5,4,3,3,3,2,1,1,2,4,5,5],
+      air: { monthly: [330,250,180,190,180,150,90,80,110,220,360,300], fog: [3,1,0,0,0,0,0,0,0,0,1,3], note: "November is the worst month of the year: stubble smoke plus winter inversion push the daily CPCB AQI past 350. December 2025 averaged 294, the cleanest December on record, and still 'poor'. GRAP curbs can restrict older diesel cabs. Midday is the cleanest window." }
     },
     varanasi: { name: "Varanasi", state: "Uttar Pradesh", lat: 25.3176, lng: 82.9739, accent: "#e0b45a", days: "Days 7–8",
       hub: { name: "Lal Bahadur Shastri Airport (VNS)", lat: 25.4524, lng: 82.8593 },
@@ -36,9 +38,12 @@ window.TRIP = {
       traffic: { speeds: [30,30,30,30,30,28,24,20,16,15,16,18,18,18,18,16,14,12,12,14,18,24,28,30], note: "The old city is car-free in practice: cabs drop at Godowlia or Assi crossing and you walk 5–15 minutes. Airport is 25 km out on the ring road, 40–75 minutes." },
       ride: { base: 40, perKm: 13, perMin: 1.2, min: 80, peak: 1.4 },
       climate: { hi: [21.0,26.8,32.0,38.0,39.4,39.5,33.6,32.2,32.4,31.1,27.9,23.1], lo: [9.8,14.0,18.4,23.8,26.7,28.9,27.0,26.1,25.9,22.6,16.8,12.2], rain: [10,16,20,3,21,123,341,303,227,95,8,14] },
-      aqi: [4,3,3,2,2,2,1,1,1,3,4,4]
+      aqi: [4,3,3,2,2,2,1,1,1,3,4,4],
+      air: { monthly: [210,160,130,140,130,110,70,60,80,130,220,190], fog: [3,2,0,0,0,0,0,0,0,0,1,2], note: "The river helps: mornings on the water are hazier than they look in photos, but the ghats clear by late morning. Evening aarti smoke plus winter haze make the 18:00 hour the day's worst." }
     }
   },
+  /* winter hourly AQI multiplier: inversion overnight, cleanest early afternoon */
+  airHourly: [1.25,1.3,1.3,1.3,1.3,1.3,1.32,1.35,1.35,1.28,1.12,.98,.85,.76,.7,.7,.76,.86,1.0,1.1,1.15,1.2,1.25,1.25],
   homeClimate: { hi: [27.6,30.9,33.0,34.6,31.3,29.1,27.1,27.9,27.8,27.9,27.2,26.8], lo: [15.9,17.2,19.5,21.1,21.2,20.4,20.0,19.7,19.5,19.3,18.4,17.2] },
 
   sights: [
@@ -176,7 +181,8 @@ window.TRIP = {
   festivals: [
     { m: 2, name: "Taj Mahotsav (Agra, 10 days)" }, { m: 3, name: "Holi: Mathura & Vrindavan are 60 km from Agra" },
     { m: 10, name: "Dussehra & Diwali (dates shift; book early)" }, { m: 11, name: "Dev Deepawali: a million lamps on the ghats (Kartik Purnima)" },
-    { m: 11, name: "Delhi stubble-burning smog peaks" }, { m: 1, name: "Republic Day parade on Kartavya Path, 26 Jan" }, { m: 12, name: "Dense fog can delay Delhi flights and trains" }
+    { m: 11, name: "Delhi stubble-burning smog peaks; GRAP curbs can hit diesel cabs and add traffic checks" },
+    { m: 11, name: "Dev Deepawali falls on 24 Nov 2026, four days before you land: the ghats will still be dressed" }, { m: 1, name: "Republic Day parade on Kartavya Path, 26 Jan" }, { m: 12, name: "Dense fog can delay Delhi flights and trains" }
   ],
 
   packing: {
@@ -184,7 +190,7 @@ window.TRIP = {
     hot: ["Sun hat and SPF 50", "Electrolyte sachets", "Loose cotton"],
     cold: ["A real jacket for Delhi mornings", "Layers for the 05:30 boat"],
     wet: ["Compact umbrella", "Dry bag for the phone on the boat"],
-    smog: ["N95 masks for Delhi", "Saline spray"]
+    smog: ["N95 / FFP2 masks, two per person per city day", "Saline nasal spray and lubricating eye drops", "Ask hotels for rooms with air purifiers (most 4★+ in Delhi have them)", "Inhaler if you have ever needed one"]
   },
 
   sources: [
@@ -200,6 +206,10 @@ window.TRIP = {
     ["Varanasi boat rides", "https://www.kashitaxi.in/en/evening-boat-ride-varanasi-ganga-aarti"],
     ["TomTom Traffic Index: New Delhi", "https://www.tomtom.com/traffic-index/city/new-delhi/"],
     ["Climate normals: Open-Meteo archive, 2023–2025 daily", "https://open-meteo.com/en/docs/historical-weather-api"],
-    ["Live weather & AQI: Open-Meteo", "https://open-meteo.com/"]
+    ["Live weather & AQI: Open-Meteo", "https://open-meteo.com/"],
+    ["Delhi December 2025 AQI average 294", "https://www.deccanherald.com/india/delhi/delhi-records-best-december-aqi-since-system-began-in-2015-3336491"],
+    ["CPCB city AQI trends 2015–2025", "https://tribe.t8np75rys.junction.express/uploads/2025/12-December/10-Wed/AQ-analysis-final_693962a3f2b57.pdf"],
+    ["Hourly pollution pattern in winter", "https://smartairfilters.com/en/blog/what-time-of-day-is-air-pollution-lowest-in-india/"],
+    ["Taj Mahal hidden by December fog", "https://www.aninews.in/news/national/general-news/dense-fog-engulfs-agra-taj-mahal-fades-from-view20251221083349/"]
   ]
 };
