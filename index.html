@@ -356,10 +356,13 @@ const AQL=['','Good','Moderate','Unhealthy for some','Poor','Very poor'];
 
 /* ───── hero: route ribbon ───── */
 function renderRoute(){
-  const seq=[T.home,T.cities.agra,T.cities.delhi,T.cities.varanasi,T.home]; const W=1000,H=150; const xs=seq.map((_,i)=>60+i*(W-120)/(seq.length-1));
+  const place=k=>k==='blr'?T.home:T.cities[k];
+  const seq=[{c:place(T.legs[0].from),lbl:`Day ${T.legs[0].day}`}]; const seenCity=new Set();
+  T.legs.forEach(l=>{ const c=place(l.to); let lbl; if(l.to==='blr') lbl=`Day ${l.day}`; else if(seenCity.has(l.to)||T.legs.filter(x=>x.to===l.to).length===1){ lbl=T.cities[l.to].days; } else { lbl=`Day ${l.day}`; } seenCity.add(l.to); seq.push({c,lbl,leg:l}); });
+  const W=1000,H=150; const xs=seq.map((_,i)=>60+i*(W-120)/(seq.length-1));
   let path='',nodes='',labels='';
-  seq.forEach((c,i)=>{ const x=xs[i],y=90; if(i){ const px=xs[i-1]; const leg=T.legs[i-1]; const o=leg.options[S.legs[leg.id]]; const km=Math.round(hav(seq[i-1],c)*(o.mode==='flight'?1:1.25)); const mx=(px+x)/2; path+=`<path class="dash" d="M${px} ${y} Q${mx} ${o.mode==='flight'?y-70:y-14} ${x} ${y}" style="stroke:${o.mode==='flight'?'var(--saffron)':'var(--teal)'}"/>`; labels+=`<text class="k" x="${mx}" y="${o.mode==='flight'?y-52:y-22}" text-anchor="middle">${km.toLocaleString('en-IN')} km · ${dur(o.mins)}</text>`; }
-    nodes+=`<g class="node"><circle cx="${x}" cy="${y}" r="5" fill="${i===0||i===4?'#fff':'var(--saffron)'}"/><text class="city" x="${x}" y="${y+34}" text-anchor="middle">${c.name}</text><text x="${x}" y="${y+52}" text-anchor="middle">${i===0?'Day 0':i===4?'Day 9':T.cities[Object.keys(T.cities)[i-1]].days}</text></g>`; });
+  seq.forEach((n,i)=>{ const x=xs[i],y=90; if(i){ const px=xs[i-1]; const o=n.leg.options[S.legs[n.leg.id]]; const km=Math.round(hav(seq[i-1].c,n.c)*(o.mode==='flight'?1:1.25)); const mx=(px+x)/2; const fl=o.mode==='flight'; path+=`<path class="dash" d="M${px} ${y} Q${mx} ${fl?y-70:y-14} ${x} ${y}" style="stroke:${fl?'var(--saffron)':'var(--teal)'}"/>`; labels+=`<text class="k" x="${mx}" y="${fl?y-52:y-22}" text-anchor="middle">${km.toLocaleString('en-IN')} km · ${dur(o.mins)}</text>`; }
+    const home=n.c===T.home; nodes+=`<g class="node"><circle cx="${x}" cy="${y}" r="5" fill="${home?'#fff':'var(--saffron)'}"/><text class="city" x="${x}" y="${y+34}" text-anchor="middle">${n.c.name}</text><text x="${x}" y="${y+52}" text-anchor="middle">${n.lbl}</text></g>`; });
   $('#route').innerHTML=`<svg viewBox="0 0 ${W} ${H}">${path}${labels}${nodes}</svg>`;
   $('#sub').textContent=`${T.subtitle} · departing ${DOW[S.start.getDay()]} ${S.start.getDate()} ${MONL[month()]} ${S.start.getFullYear()}`;
 }
@@ -422,7 +425,7 @@ function renderWeather(){
   for(let v=10;v<=40;v+=10) g+=`<line class="ax" x1="${L}" x2="${W-Rr}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-8}" y="${y(v)+3}" text-anchor="end">${v}°</text>`;
   for(const c of cities){ g+=`<path d="M${c.climate.hi.map((v,i)=>`${x(i)},${y(v)}`).join('L')}" stroke="${c.accent}"/><path class="lo" d="M${c.climate.lo.map((v,i)=>`${x(i)},${y(v)}`).join('L')}" stroke="${c.accent}"/>`; }
   for(let i=0;i<12;i++) g+=`<g class="mo" data-m="${i}"><rect x="${x(i)-(W-L-Rr)/22}" y="${Tt}" width="${(W-L-Rr)/11}" height="${H-Tt-B}" fill="transparent"/><text x="${x(i)}" y="${H-14}" text-anchor="middle" ${i===m?'fill="#f0e6d6"':''}>${MON[i]}</text></g>`;
-  g+=cities.map((c,i)=>`<g transform="translate(${L+i*130},${H+4})"><line x1="0" x2="18" y1="0" y2="0" stroke="${c.accent}" stroke-width="1.6"/><text x="24" y="3">${c.name} high · dashed low</text></g>`).join('');
+  g+=cities.map((c,i)=>`<g transform="translate(${L+i*300},${H+4})"><line x1="0" x2="18" y1="0" y2="0" stroke="${c.accent}" stroke-width="1.6"/><text x="24" y="3">${c.name} high · dashed low</text></g>`).join('');
   $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H+16}">${g}</svg>`;
   $$('#chart .mo').forEach(el=>el.addEventListener('click',()=>setMonth(+el.dataset.m)));
   $('#wx').innerHTML=cities.map(c=>{ const cl=c.climate; const d=dayDate({agra:1,delhi:3,varanasi:7}[Object.keys(T.cities).find(k=>T.cities[k]===c)]); const sr=sun(c.lat,c.lng,d); const a=c.aqi[m]; return `<div><div class="cn" style="color:${c.accent}">${c.name}</div><div class="big">${cl.hi[m]}°<small> / ${cl.lo[m]}°</small></div><ul><li>Rain in ${MONL[m]}<b>${cl.rain[m]} mm${cl.rain[m]>150?' · monsoon':cl.rain[m]<15?' · dry':''}</b></li><li>Air quality, typical<b class="${a>=4?'bad':a===3?'warn':'ok'}">${AQL[a]}</b></li><li>Sunrise on your day<b>${hm(sr.rise)}</b></li><li>Sunset<b>${hm(sr.set)}</b></li><li>Feels like<b>${cl.hi[m]>=38?'brutal afternoons':cl.hi[m]>=33?'hot, plan mornings':cl.lo[m]<=10?'cold mornings, fine days':'ideal'}</b></li></ul></div>`; }).join('');
