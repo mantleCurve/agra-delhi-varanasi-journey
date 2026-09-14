@@ -82,6 +82,7 @@ main{position:relative;z-index:2}
 .stamp{font-family:var(--script);font-weight:700;color:var(--saffron);line-height:.95;text-align:center;text-shadow:0 3px 12px rgba(0,0,0,.6);transform:rotate(-12deg);transform-origin:center;font-size:clamp(22px,2.3vw,30px);padding:14px 34px 0 0}
 .stamp u{display:block;width:60%;height:2px;margin:6px auto 0;background:var(--saffron);text-decoration:none;border-radius:2px;transform:rotate(3deg)}
 .hero .stage{position:relative;height:clamp(320px,54vw,720px);margin-top:clamp(10px,2vw,30px)}
+.hero .stage.empty{height:0;margin:0}.hero .stage.empty .tag{display:none}
 .hero .stage .dio.agra{left:1%;top:8%;width:28%}
 .hero .stage .dio.delhi{left:31%;top:-3%;width:38%}
 .hero .stage .dio.varanasi{right:1%;top:24%;width:29%}
@@ -142,6 +143,7 @@ main{position:relative;z-index:2}
 .cityhead{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px;padding:70px 0 20px;min-height:340px}
 .cityhead .dio{position:relative;justify-self:end;width:min(100%,440px)}
 .cityhead .dio.big{width:min(100%,520px)}
+.cityhead.noart{grid-template-columns:1fr;min-height:0;padding-top:50px}
 .cityhead h3{font-family:var(--serif);font-weight:400;font-size:clamp(64px,8vw,112px);line-height:.95;margin:8px 0 6px;color:var(--cream);text-shadow:0 8px 40px rgba(0,0,0,.65)}
 .cityhead .cd{font-size:16px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--cream)}
 .cityhead .cd::after{content:"";display:block;width:40px;height:1px;background:var(--cream);opacity:.7;margin-top:14px}
@@ -297,7 +299,7 @@ footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer 
     <div class="tags">History<br>Culture<br>Food<br>People<br>Stories<br><b>You</b><i></i></div>
     <div class="head">
       <div class="eyebrow">A journey through</div>
-      <h1>Agra<i class="d" style="background:var(--saffron)"></i>Delhi<i class="d" style="background:var(--teal)"></i>Varanasi</h1>
+      <h1 id="heroTitle">Agra<i class="d" style="background:var(--saffron)"></i>Delhi<i class="d" style="background:var(--teal)"></i>Varanasi</h1>
       <div class="nights">9 Nights<i></i>10 Days</div>
       <div class="sub">Three cities. A thousand stories.</div>
       <div class="dep" id="sub"></div>
@@ -305,9 +307,9 @@ footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer 
     <div class="stamp">Same<br>Roads<br>New<br>Perspective<u></u></div>
   </div>
   <div class="stage" id="stage">
-    <div class="dio tilt agra" data-p="14" data-city="agra"><img src="img/agra.webp" alt="Agra diorama: Taj Mahal and Agra Fort" fetchpriority="high"></div>
-    <div class="dio tilt delhi" data-p="8" data-city="delhi"><img src="img/delhi.webp" alt="Delhi diorama: India Gate, Red Fort, Qutub Minar, Humayun's Tomb" fetchpriority="high"></div>
-    <div class="dio tilt varanasi" data-p="18" data-city="varanasi"><img src="img/varanasi.webp" alt="Varanasi diorama: the ghats at dusk"></div>
+    <div class="dio tilt agra" data-p="14" data-city="agra"><img src="img/agra.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Agra diorama: Taj Mahal and Agra Fort" fetchpriority="high"></div>
+    <div class="dio tilt delhi" data-p="8" data-city="delhi"><img src="img/delhi.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Delhi diorama: India Gate, Red Fort, Qutub Minar, Humayun's Tomb" fetchpriority="high"></div>
+    <div class="dio tilt varanasi" data-p="18" data-city="varanasi"><img src="img/varanasi.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Varanasi diorama: the ghats at dusk"></div>
     <span class="tag a">Timeless Beauty</span><span class="tag d">Layers of History</span><span class="tag v">Spiritual Rhythm</span>
   </div>
   <p class="lead">The winter edition. Ten days from the last weekend of November into the first week of December: cool mornings, warm afternoons, the year's worst air, and fog that can swallow the Taj until ten. Every hop measured from real coordinates, every fare and timetable checked, every hour rated for smog. Change the date up top and it all re-plans.</p>
@@ -502,7 +504,7 @@ function renderDays(){
   let prevCity=null; const runLen=i=>{ let n=0; for(let j=i;j<T.days.length&&T.days[j].city===T.days[i].city;j++) n++; return n; };
   $('#dayList').innerHTML=T.days.map((day,di)=>{ const d=dayDate(day.n); const c=T.cities[day.city]; const dm=d.getMonth();
     let head=''; if(day.city!==prevCity && runLen(di)>1){ prevCity=day.city; const cl=c.climate, m=dm; const mySights=T.sights.filter(x=>x.city===day.city); const feeSum=mySights.filter(x=>!x.optional).reduce((a,x)=>a+x.fee[S.cit],0); const nDays=T.days.filter(x=>x.city===day.city&&x.items.some(i=>i.kind==='sight')).length;
-      head=`<div class="cityhead"><div><div class="eyebrow rule">${c.days} · ${c.state}</div><h3>${c.name}</h3><div class="cd">${nDays} days</div><span class="script tagline" style="color:var(--cream)">${CITYTAG[day.city]||''}</span><div class="facts">${chip('thermo',`<b>${Math.round(cl.hi[m])}° / ${Math.round(cl.lo[m])}°</b> in ${MONL[m]}`)}${chip('sight',`<b>${mySights.length}</b> sights`)}${chip('ticket',`entry <b>${money(feeSum)}</b> pp`)}${chip('bed',`base <b>${c.stay.name}</b>`)}${c.air?`<span class="chip aq ${aqiCat(c.air.monthly[m])[1]}" style="--aqc:${aqiCol(c.air.monthly[m])}">${svg('wind')}<span>AQI <b>~${c.air.monthly[m]}</b> ${aqiCat(c.air.monthly[m])[0].toLowerCase()} in ${MONL[m]}</span></span>`:''}</div></div><div class="dio tilt ${day.city==='delhi'?'big':''}" data-p="${day.city==='delhi'?6:10}"><img src="img/${day.city}.webp" alt="${c.name} diorama" loading="lazy"></div></div>`; }
+      head=`<div class="cityhead"><div><div class="eyebrow rule">${c.days} · ${c.state}</div><h3>${c.name}</h3><div class="cd">${nDays} days</div><span class="script tagline" style="color:var(--cream)">${CITYTAG[day.city]||''}</span><div class="facts">${chip('thermo',`<b>${Math.round(cl.hi[m])}° / ${Math.round(cl.lo[m])}°</b> in ${MONL[m]}`)}${chip('sight',`<b>${mySights.length}</b> sights`)}${chip('ticket',`entry <b>${money(feeSum)}</b> pp`)}${chip('bed',`base <b>${c.stay.name}</b>`)}${c.air?`<span class="chip aq ${aqiCat(c.air.monthly[m])[1]}" style="--aqc:${aqiCol(c.air.monthly[m])}">${svg('wind')}<span>AQI <b>~${c.air.monthly[m]}</b> ${aqiCat(c.air.monthly[m])[0].toLowerCase()} in ${MONL[m]}</span></span>`:''}</div></div><div class="dio tilt ${day.city==='delhi'?'big':''}" data-p="${day.city==='delhi'?6:10}"><img src="img/${day.city}.webp" alt="${c.name} diorama" loading="lazy" onerror="this.closest('.cityhead').classList.add('noart');this.closest('.dio').remove()"></div></div>`; }
     else if(day.city!==prevCity) prevCity=day.city; let rideCost=0,fees=0,km=0; const rows=day.items.map(it=>{ const t=hm(it.t); const ck=it.cityRef||day.city; const temp=tempAt(ck,it.t,dm); const aq=aqiAt(ck,dm,it.t); const aqc=aqiCat(aq); const aqChip=aq!=null&&['sight','walk','ride','free','meal'].includes(it.kind)?`<span class="chip aq ${aqc[1]}" style="--aqc:${aqiCol(aq)}">${svg('wind')}<span>AQI ~${aq} · ${aqc[0]}</span></span>`:''; let ic=it.kind,lb=it.label||'',meta=[],x='',alert='',cls='';
       if(it.kind==='sight'){ const s=SIGHT[it.ref]; lb=`<a href="#" data-sight="${s.id}">${it.label||s.name}</a>`; const fee=s.fee[S.cit]; const first=!sightsSeen.has(s.id); sightsSeen.add(s.id); if(first&&!it.short) fees+=fee; meta=[chip('ticket',fee?money(fee):'free entry'),chip('clock','~'+dur(it.short?60:s.dur)),chip('pin',Math.round(hav(c.stay,s)*1.3)+' km from base'),chip('thermo',`${temp}°C at ${t}`),aqChip]; const fg=fogLevel(ck,dm); if(fg>=2&&it.t<9.5) alert+=`<div class="alert fog">${svg('rain')} Fog risk: ${MONL[dm]} mornings in ${c.name} can hide everything until 09:00–10:00. Go anyway, but keep the early afternoon free for a second look.</div>`; x=s.blurb+(s.feeNote?` · ${s.feeNote}`:''); cls=`sight" style="--c:${c.accent}`; const dow=DOW[d.getDay()]; if(s.closed.toLowerCase().includes(dow.toLowerCase())) alert=`<div class="alert">${s.name} is closed on ${dow}s and Day ${day.n} falls on a ${dow}. Shift the departure date, or swap this with another day.</div>`; }
       else if(it.kind==='ride'){ const h=hop(it,day); km+=h.km; rideCost+=h.fare[0]; ic=it.metro?'metro':'car'; meta=[chip('road',`${h.km} km by road`),chip('clock',dur(h.mins)),chip('gauge',h.metro?'metro, no traffic':h.cong>.6?'<i class="warn">heavy traffic</i>':h.cong>.35?'moderate traffic':'light traffic'),chip('money',`${h.metro?'metro':it.fixed?'fixed cab':'Uber est.'} ${range(...h.fare)}`),chip('thermo',`${temp}°C`),aqChip]; if(!h.metro&&!it.fixed) x=`Estimated at ${t}: ${h.sp} km/h typical speed, surge ×${h.surge.toFixed(2)}. Per-km and per-minute rates for a UberGo-class car in ${ctxName(it,day)}.`; }
