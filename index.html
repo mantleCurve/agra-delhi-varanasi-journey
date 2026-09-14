@@ -499,9 +499,9 @@ function hop(it,day){ const ctx=it.cityRef||day.city; const a=pt(it.from,ctx)||T
 function renderDays(){
   const sightsSeen=new Set();
   const CITYTAG={agra:'Timeless Beauty',delhi:'Layers of History',varanasi:'Spiritual Rhythm'};
-  let prevCity=null;
-  $('#dayList').innerHTML=T.days.map(day=>{ const d=dayDate(day.n); const c=T.cities[day.city]; const dm=d.getMonth();
-    let head=''; if(day.city!==prevCity && T.days.filter(x=>x.city===day.city).length>1){ prevCity=day.city; const cl=c.climate, m=dm; const mySights=T.sights.filter(x=>x.city===day.city); const feeSum=mySights.filter(x=>!x.optional).reduce((a,x)=>a+x.fee[S.cit],0); const nDays=T.days.filter(x=>x.city===day.city&&x.items.some(i=>i.kind==='sight')).length;
+  let prevCity=null; const runLen=i=>{ let n=0; for(let j=i;j<T.days.length&&T.days[j].city===T.days[i].city;j++) n++; return n; };
+  $('#dayList').innerHTML=T.days.map((day,di)=>{ const d=dayDate(day.n); const c=T.cities[day.city]; const dm=d.getMonth();
+    let head=''; if(day.city!==prevCity && runLen(di)>1){ prevCity=day.city; const cl=c.climate, m=dm; const mySights=T.sights.filter(x=>x.city===day.city); const feeSum=mySights.filter(x=>!x.optional).reduce((a,x)=>a+x.fee[S.cit],0); const nDays=T.days.filter(x=>x.city===day.city&&x.items.some(i=>i.kind==='sight')).length;
       head=`<div class="cityhead"><div><div class="eyebrow rule">${c.days} · ${c.state}</div><h3>${c.name}</h3><div class="cd">${nDays} days</div><span class="script tagline" style="color:var(--cream)">${CITYTAG[day.city]||''}</span><div class="facts">${chip('thermo',`<b>${Math.round(cl.hi[m])}° / ${Math.round(cl.lo[m])}°</b> in ${MONL[m]}`)}${chip('sight',`<b>${mySights.length}</b> sights`)}${chip('ticket',`entry <b>${money(feeSum)}</b> pp`)}${chip('bed',`base <b>${c.stay.name}</b>`)}${c.air?`<span class="chip aq ${aqiCat(c.air.monthly[m])[1]}" style="--aqc:${aqiCol(c.air.monthly[m])}">${svg('wind')}<span>AQI <b>~${c.air.monthly[m]}</b> ${aqiCat(c.air.monthly[m])[0].toLowerCase()} in ${MONL[m]}</span></span>`:''}</div></div><div class="dio tilt ${day.city==='delhi'?'big':''}" data-p="${day.city==='delhi'?6:10}"><img src="img/${day.city}.webp" alt="${c.name} diorama" loading="lazy"></div></div>`; }
     else if(day.city!==prevCity) prevCity=day.city; let rideCost=0,fees=0,km=0; const rows=day.items.map(it=>{ const t=hm(it.t); const ck=it.cityRef||day.city; const temp=tempAt(ck,it.t,dm); const aq=aqiAt(ck,dm,it.t); const aqc=aqiCat(aq); const aqChip=aq!=null&&['sight','walk','ride','free','meal'].includes(it.kind)?`<span class="chip aq ${aqc[1]}" style="--aqc:${aqiCol(aq)}">${svg('wind')}<span>AQI ~${aq} · ${aqc[0]}</span></span>`:''; let ic=it.kind,lb=it.label||'',meta=[],x='',alert='',cls='';
       if(it.kind==='sight'){ const s=SIGHT[it.ref]; lb=`<a href="#" data-sight="${s.id}">${it.label||s.name}</a>`; const fee=s.fee[S.cit]; const first=!sightsSeen.has(s.id); sightsSeen.add(s.id); if(first&&!it.short) fees+=fee; meta=[chip('ticket',fee?money(fee):'free entry'),chip('clock','~'+dur(it.short?60:s.dur)),chip('pin',Math.round(hav(c.stay,s)*1.3)+' km from base'),chip('thermo',`${temp}°C at ${t}`),aqChip]; const fg=fogLevel(ck,dm); if(fg>=2&&it.t<9.5) alert+=`<div class="alert fog">${svg('rain')} Fog risk: ${MONL[dm]} mornings in ${c.name} can hide everything until 09:00–10:00. Go anyway, but keep the early afternoon free for a second look.</div>`; x=s.blurb+(s.feeNote?` · ${s.feeNote}`:''); cls=`sight" style="--c:${c.accent}`; const dow=DOW[d.getDay()]; if(s.closed.toLowerCase().includes(dow.toLowerCase())) alert=`<div class="alert">${s.name} is closed on ${dow}s and Day ${day.n} falls on a ${dow}. Shift the departure date, or swap this with another day.</div>`; }
@@ -637,7 +637,7 @@ if(!reduce){ const cv=$('#embers'), ctx=cv.getContext('2d'); let W,H,P=[]; const
     ctx.globalAlpha=1; requestAnimationFrame(draw); })(lt); }
 
 /* ───── wiring ───── */
-function renderAll(parts){ const all=!parts; if(all||parts.includes('route')) renderRoute(); if(all||parts.includes('legs')) renderLegs(); if(all||parts.includes('days')) renderDays(); if(all||parts.includes('weather')) renderWeather(); if(all||parts.includes('weather')) renderAir(); if(all||parts.includes('traffic')) renderTraffic(); if(all||parts.includes('budget')) renderBudget(); if(all||parts.includes('todo')) renderTodo(); if(all||parts.includes('map')) renderMap(); $('#tv').textContent=S.n; }
+function renderAll(parts){ const all=!parts; setTimeout(()=>{ if(typeof reveal==='function'){ reveal($$('#dayList > *, #legList > *')); } },0); if(all||parts.includes('route')) renderRoute(); if(all||parts.includes('legs')) renderLegs(); if(all||parts.includes('days')) renderDays(); if(all||parts.includes('weather')) renderWeather(); if(all||parts.includes('weather')) renderAir(); if(all||parts.includes('traffic')) renderTraffic(); if(all||parts.includes('budget')) renderBudget(); if(all||parts.includes('todo')) renderTodo(); if(all||parts.includes('map')) renderMap(); $('#tv').textContent=S.n; }
 $('#start').value=iso(S.start); $('#start').addEventListener('change',e=>{ if(!e.target.value) return; S.start=new Date(e.target.value+'T00:00'); renderAll(); });
 $('#tm').addEventListener('click',()=>{ S.n=Math.max(1,S.n-1); renderAll(['budget']); }); $('#tp').addEventListener('click',()=>{ S.n=Math.min(12,S.n+1); renderAll(['budget']); });
 $$('#cit button').forEach(b=>b.addEventListener('click',()=>{ S.cit=+b.dataset.v; $$('#cit button').forEach(x=>x.classList.toggle('on',x===b)); renderAll(['days','budget']); }));
@@ -648,7 +648,11 @@ $('#share').addEventListener('click',()=>{ const u=new URL(location.href); u.sea
 $('#src').innerHTML=T.sources.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join('');
 $$('#cit button').forEach(x=>x.classList.toggle('on',+x.dataset.v===S.cit)); $$('#cur button').forEach(x=>x.classList.toggle('on',x.dataset.v===S.cur));
 renderAll(); live(); bindMotion();
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.1}); $$('section > *').forEach(el=>{ el.classList.add('rv'); io.observe(el); });
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:0,rootMargin:'0px 0px -4% 0px'});
+function reveal(els){ els.forEach(el=>{ if(el.classList.contains('rv')) return; el.classList.add('rv'); io.observe(el); }); }
+reveal($$('section > *:not(#dayList):not(#legList)')); reveal($$('#dayList > *, #legList > *'));
+// safety net: anything still hidden after 3s becomes visible
+setTimeout(()=>$$('.rv:not(.in)').forEach(el=>el.classList.add('in')),3000);
 })();
 </script>
 </body>
