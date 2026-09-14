@@ -8,27 +8,27 @@
 <meta name="theme-color" content="#0a0907">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0907'/%3E%3Ccircle cx='18' cy='32' r='6' fill='%23f28c28'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23e8dcc6'/%3E%3Ccircle cx='46' cy='32' r='6' fill='%233aa7b8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Caveat:wght@600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
-:root{--bg:#0a0907;--ink:#efe4d2;--ink2:rgba(239,228,210,.72);--ink3:rgba(239,228,210,.45);--line:rgba(232,220,198,.16);--cream:#e8dcc6;--saffron:#f28c28;--teal:#3aa7b8;--gold:#e0b45a;--serif:"Playfair Display",Georgia,serif;--sans:Inter,system-ui,sans-serif;--script:Caveat,"Segoe Script",cursive;--mono:"JetBrains Mono",ui-monospace,monospace;--ease:cubic-bezier(.19,1,.22,1);--w:min(1240px,100% - 2*clamp(18px,4vw,64px))}
+:root{--bg:#0a0907;--ink:#f3e9d8;--ink2:rgba(243,233,216,.86);--ink3:rgba(243,233,216,.64);--line:rgba(232,220,198,.16);--cream:#e8dcc6;--saffron:#f28c28;--teal:#3aa7b8;--gold:#e0b45a;--serif:"Playfair Display",Georgia,serif;--sans:Fraunces,"Iowan Old Style",Georgia,serif;--script:Caveat,"Segoe Script",cursive;--mono:"Courier Prime","Courier New",monospace;--ease:cubic-bezier(.19,1,.22,1);--w:min(1240px,100% - 2*clamp(18px,4vw,64px))}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font-family:var(--sans);font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);font-weight:500;font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}button,select,input{font:inherit;color:inherit}
 button{background:none;border:0;padding:0;cursor:pointer}
 ::selection{background:var(--saffron);color:#0a0907}
-.mono{font-family:var(--mono);font-size:.82em;letter-spacing:.02em}
-.eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--ink2);font-weight:400}
+.mono{font-family:var(--mono);font-size:.95em;font-weight:700;letter-spacing:.02em}
+.eyebrow{font-size:14px;letter-spacing:.36em;text-transform:uppercase;color:var(--ink2);font-weight:700}
 .eyebrow.rule{display:flex;align-items:center;gap:14px}.eyebrow.rule::before{content:"";width:34px;height:1px;background:var(--saffron)}
-h2{font-family:var(--serif);font-weight:700;font-size:clamp(40px,5.6vw,78px);line-height:1;letter-spacing:-.01em;margin:14px 0 22px;color:var(--cream);text-shadow:0 6px 30px rgba(0,0,0,.6)}
-h2 em{font-family:var(--script);font-style:normal;font-weight:600;color:var(--saffron);font-size:1.12em;letter-spacing:0}
-.script{font-family:var(--script);font-weight:600;color:var(--saffron);line-height:.95;text-shadow:0 4px 14px rgba(0,0,0,.6)}
+h2{font-family:var(--serif);font-weight:900;font-size:clamp(48px,6.4vw,92px);line-height:1;letter-spacing:-.01em;margin:14px 0 22px;color:var(--cream);text-shadow:0 6px 30px rgba(0,0,0,.6)}
+h2 em{font-family:var(--script);font-style:normal;font-weight:700;color:var(--saffron);font-size:1.12em;letter-spacing:0}
+.script{font-family:var(--script);font-weight:700;color:var(--saffron);line-height:.95;text-shadow:0 4px 14px rgba(0,0,0,.6)}
 section{position:relative;width:var(--w);margin:0 auto;padding:clamp(64px,9vw,120px) 0}
 section+section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent)}
-.lead{max-width:56ch;font-size:clamp(15px,1.2vw,17.5px);color:var(--ink2)}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;border:1px solid var(--line);font-size:12px;color:var(--ink2);white-space:nowrap;background:rgba(10,9,7,.5);backdrop-filter:blur(8px)}
+.lead{max-width:56ch;font-size:clamp(18px,1.6vw,23px);font-weight:500;color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);font-size:14px;font-weight:700;color:var(--ink2);white-space:nowrap;background:rgba(10,9,7,.5);backdrop-filter:blur(8px)}
 .pill i{width:7px;height:7px;border-radius:50%;background:var(--c,var(--saffron))}
 .warn{color:#f6b26b}.ok{color:#8fd3a8}.bad{color:#f28c8c}
 main{position:relative;z-index:2}
@@ -52,54 +52,54 @@ main{position:relative;z-index:2}
 /* controls bar */
 .bar{position:sticky;top:0;z-index:30;background:rgba(10,9,7,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
 .bar .in{width:var(--w);margin:0 auto;display:flex;align-items:center;gap:14px 22px;padding:10px 0;flex-wrap:wrap}
-.bar .brand{font-family:var(--serif);font-weight:700;font-size:19px;margin-right:auto;letter-spacing:.14em;color:var(--cream)}
+.bar .brand{font-family:var(--serif);font-weight:900;font-size:24px;margin-right:auto;letter-spacing:.14em;color:var(--cream)}
 .bar .brand b{color:var(--saffron);font-weight:400}
-.bar .brand span{font-family:var(--script);font-weight:500;font-size:20px;color:var(--saffron);letter-spacing:0;margin-left:10px;text-transform:none}
-.ctl{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
-.ctl label{letter-spacing:.2em;text-transform:uppercase;font-size:10px;color:var(--ink3)}
-.ctl input[type=date],.ctl select{background:transparent;border:0;border-bottom:1px solid var(--line);padding:4px 2px;color:var(--ink);font-size:13px;outline:0;color-scheme:dark}
+.bar .brand span{font-family:var(--script);font-weight:700;font-size:26px;color:var(--saffron);letter-spacing:0;margin-left:10px;text-transform:none}
+.ctl{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--ink2)}
+.ctl label{letter-spacing:.2em;text-transform:uppercase;font-size:12px;font-weight:700;color:var(--ink3)}
+.ctl input[type=date],.ctl select{background:transparent;border:0;border-bottom:1px solid var(--line);padding:4px 2px;color:var(--ink);font-size:16px;font-weight:700;outline:0;color-scheme:dark}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
-.seg button{padding:5px 11px;font-size:11px;letter-spacing:.08em;color:var(--ink2);transition:all .25s}
+.seg button{padding:7px 14px;font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--ink2);transition:all .25s}
 .seg button.on{background:var(--cream);color:#0a0907}
 .stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:99px}
-.stepper button{width:28px;height:26px;font-size:16px;color:var(--ink2)}.stepper b{font-weight:500;min-width:20px;text-align:center;font-size:13px}
-.bar nav{display:flex;gap:18px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink3);width:100%}
+.stepper button{width:32px;height:30px;font-size:20px;color:var(--ink2)}.stepper b{font-weight:800;min-width:24px;text-align:center;font-size:16px}
+.bar nav{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);width:100%}
 .bar nav a{text-decoration:none;padding:6px 0}.bar nav a:hover{color:var(--cream)}
 
 /* ─── hero: the poster header, unboxed ─── */
 .hero{padding-top:clamp(40px,6vw,80px);min-height:auto;overflow:visible}
 .hero .top{display:grid;grid-template-columns:120px 1fr 230px;gap:20px;align-items:start}
-.tags{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink3);line-height:1.95;font-weight:400;padding-top:14px}
-.tags b{color:var(--saffron);font-weight:500}.tags i{display:block;width:34px;height:1px;background:var(--saffron);margin-top:6px}
+.tags{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);line-height:1.9;font-weight:700;padding-top:14px}
+.tags b{color:var(--saffron);font-weight:800}.tags i{display:block;width:34px;height:1px;background:var(--saffron);margin-top:6px}
 .head{text-align:center}
 .head .eyebrow{letter-spacing:.6em}
-.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(46px,7.2vw,104px);line-height:1;letter-spacing:-.005em;margin:14px 0 16px;color:var(--cream);text-shadow:0 8px 40px rgba(0,0,0,.65);white-space:nowrap}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,7.8vw,114px);line-height:1;letter-spacing:-.005em;margin:14px 0 16px;color:var(--cream);text-shadow:0 8px 40px rgba(0,0,0,.65);white-space:nowrap}
 .hero h1 .d{display:inline-block;width:.16em;height:.16em;border-radius:50%;vertical-align:middle;margin:0 .22em;transform:translateY(-.08em)}
-.hero .nights{font-size:clamp(12px,1.5vw,16px);letter-spacing:.42em;text-transform:uppercase;color:var(--cream);font-weight:500}
+.hero .nights{font-size:clamp(16px,1.9vw,22px);letter-spacing:.4em;text-transform:uppercase;color:var(--cream);font-weight:800}
 .hero .nights i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--cream);margin:0 12px;vertical-align:middle}
-.hero .sub{margin-top:12px;font-size:11px;letter-spacing:.5em;text-transform:uppercase;color:var(--ink2)}
-.hero .dep{margin-top:14px;font-family:var(--script);font-size:clamp(20px,2.4vw,30px);color:var(--gold);font-weight:500}
-.stamp{font-family:var(--script);font-weight:600;color:var(--saffron);line-height:.95;text-align:center;text-shadow:0 3px 12px rgba(0,0,0,.6);transform:rotate(-12deg);transform-origin:center;font-size:clamp(20px,2.2vw,28px);padding:14px 26px 0 0}
+.hero .sub{margin-top:12px;font-size:14px;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--ink2)}
+.hero .dep{margin-top:14px;font-family:var(--script);font-size:clamp(28px,3.2vw,42px);color:var(--gold);font-weight:700}
+.stamp{font-family:var(--script);font-weight:700;color:var(--saffron);line-height:.95;text-align:center;text-shadow:0 3px 12px rgba(0,0,0,.6);transform:rotate(-12deg);transform-origin:center;font-size:clamp(26px,2.8vw,36px);padding:14px 26px 0 0}
 .stamp u{display:block;width:60%;height:2px;margin:6px auto 0;background:var(--saffron);text-decoration:none;border-radius:2px;transform:rotate(3deg)}
 .hero .stage{position:relative;height:clamp(320px,54vw,720px);margin-top:clamp(10px,2vw,30px)}
 .hero .stage .dio.agra{left:1%;top:8%;width:28%}
 .hero .stage .dio.delhi{left:31%;top:-3%;width:38%}
 .hero .stage .dio.varanasi{right:1%;top:24%;width:29%}
-.hero .stage .tag{position:absolute;font-family:var(--script);font-weight:500;color:var(--cream);font-size:clamp(18px,2.2vw,28px);transform:rotate(-7deg);text-shadow:0 4px 14px rgba(0,0,0,.8);pointer-events:none}
+.hero .stage .tag{position:absolute;font-family:var(--script);font-weight:700;color:var(--cream);font-size:clamp(26px,3.2vw,42px);transform:rotate(-7deg);text-shadow:0 4px 14px rgba(0,0,0,.8);pointer-events:none}
 .hero .stage .tag.a{left:6%;bottom:14%}.hero .stage .tag.d{left:50%;bottom:0}.hero .stage .tag.v{right:3%;bottom:8%}
 .hero .lead{margin:10px auto 0;text-align:center;max-width:60ch}
 .route{margin-top:clamp(26px,4vw,50px);position:relative}
 .route svg{width:100%;height:auto;display:block;overflow:visible}
 .route .dash{stroke:var(--saffron);stroke-width:1.5;fill:none;stroke-dasharray:6 6;animation:march 1.4s linear infinite}
 @keyframes march{to{stroke-dashoffset:-24}}
-.route text{font-family:var(--sans);fill:var(--ink2);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.route text.k{font-family:var(--mono);fill:var(--ink3);font-size:10px;letter-spacing:.02em;text-transform:none}
-.route text.city{font-family:var(--serif);font-weight:700;font-size:20px;fill:var(--cream);letter-spacing:0;text-transform:none}
-.live{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:24px;font-size:13px;color:var(--ink2);justify-content:center}
+.route text{font-family:var(--sans);font-weight:700;fill:var(--ink2);font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.route text.k{font-family:var(--mono);font-weight:700;fill:var(--ink2);font-size:14px;letter-spacing:.02em;text-transform:none}
+.route text.city{font-family:var(--serif);font-weight:900;font-size:27px;fill:var(--cream);letter-spacing:0;text-transform:none}
+.live{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:26px;font-size:17px;font-weight:600;color:var(--ink);justify-content:center}
 .live div{display:flex;align-items:center;gap:10px}
-.live b{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--cream)}
+.live b{font-family:var(--serif);font-size:34px;font-weight:900;color:var(--cream)}
 .live .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
-.live small{font-size:11px;color:var(--ink3);letter-spacing:.06em}
+.live small{font-size:14px;font-weight:700;color:var(--ink2);letter-spacing:.06em}
 
 /* map */
 .mapwrap{position:relative;width:100%;height:clamp(420px,70vh,720px);border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 90px rgba(0,0,0,.6)}
@@ -108,130 +108,134 @@ main{position:relative;z-index:2}
 .leaflet-container{font-family:var(--sans)}
 .leaflet-popup-content-wrapper{background:rgba(16,14,11,.94);color:var(--ink);border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .leaflet-popup-tip{background:rgba(16,14,11,.94)}
-.leaflet-popup-content{margin:14px 16px;font-size:13px;line-height:1.5}
-.leaflet-popup-content b{font-family:var(--serif);font-size:18px;font-weight:600;display:block;margin-bottom:4px;color:var(--cream)}
-.leaflet-popup-content .k{font-family:var(--mono);font-size:11px;color:var(--ink3);display:block;margin-top:6px}
-.leaflet-control-attribution{background:rgba(10,9,7,.7)!important;color:var(--ink3)!important;font-size:10px}
+.leaflet-popup-content{margin:14px 16px;font-size:16px;font-weight:600;line-height:1.5}
+.leaflet-popup-content b{font-family:var(--serif);font-size:22px;font-weight:900;display:block;margin-bottom:4px;color:var(--cream)}
+.leaflet-popup-content .k{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink2);display:block;margin-top:6px}
+.leaflet-control-attribution{background:rgba(10,9,7,.7)!important;color:var(--ink3)!important;font-size:12px}
 .leaflet-control-attribution a{color:var(--ink2)!important}
 .leaflet-bar a{background:rgba(16,14,11,.9)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .maplegend{position:absolute;left:14px;bottom:14px;z-index:500;display:flex;flex-wrap:wrap;gap:8px}
-.mapstats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:22px;font-size:13px;color:var(--ink2)}
-.mapstats b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--cream);display:block;line-height:1}
-.mapstats small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+.mapstats{display:flex;flex-wrap:wrap;gap:12px 44px;margin-top:22px;font-size:16px;color:var(--ink2)}
+.mapstats b{font-family:var(--serif);font-weight:900;font-size:42px;color:var(--cream);display:block;line-height:1}
+.mapstats small{display:block;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin-top:6px}
 
 /* legs */
-.leg{display:grid;grid-template-columns:170px 1fr;gap:20px 40px;padding:30px 0;border-top:1px dashed var(--line)}
-.leg .who{font-family:var(--serif);font-weight:700;font-size:28px;line-height:1.05;color:var(--cream)}
-.leg .who small{display:block;font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink3);margin-top:8px}
-.leg .who .km{display:block;font-family:var(--mono);font-size:11px;color:var(--ink2);margin-top:10px}
-.opt{display:grid;grid-template-columns:38px 1fr auto;gap:8px 18px;align-items:center;padding:14px 0;border-top:1px dashed var(--line);cursor:pointer;transition:opacity .3s}
+.leg{display:grid;grid-template-columns:200px 1fr;gap:20px 40px;padding:30px 0;border-top:1px dashed var(--line)}
+.leg .who{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.05;color:var(--cream)}
+.leg .who small{display:block;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);margin-top:8px}
+.leg .who .km{display:block;font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink2);margin-top:10px}
+.opt{display:grid;grid-template-columns:44px 1fr auto;gap:8px 18px;align-items:center;padding:14px 0;border-top:1px dashed var(--line);cursor:pointer;transition:opacity .3s}
 .opt:first-child{border-top:0}.opt.off{opacity:.42}
-.opt .ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2)}
+.opt .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2)}
 .opt.on .ic{background:var(--saffron);border-color:var(--saffron);color:#0a0907}
-.opt .ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.opt .nm{font-size:15px;font-weight:500;color:var(--cream)}
-.opt .meta{grid-column:2;font-size:12.5px;color:var(--ink2)}.opt .meta .mono{color:var(--ink)}
-.opt .note{grid-column:2;font-size:12px;color:var(--ink3);max-width:60ch}
-.opt .fare{font-family:var(--serif);font-weight:600;font-size:24px;text-align:right;line-height:1;color:var(--cream)}
-.opt .fare small{display:block;font-family:var(--sans);font-weight:400;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-top:6px}
+.opt .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.opt .nm{font-size:21px;font-weight:800;color:var(--cream)}
+.opt .meta{grid-column:2;font-size:16px;font-weight:600;color:var(--ink2)}.opt .meta .mono{color:var(--ink)}
+.opt .note{grid-column:2;font-size:15.5px;font-weight:500;color:var(--ink3);max-width:60ch}
+.opt .fare{font-family:var(--serif);font-weight:900;font-size:32px;text-align:right;line-height:1;color:var(--cream)}
+.opt .fare small{display:block;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin-top:6px}
 .opt .cls{grid-column:2;display:flex;gap:8px;margin-top:4px}
-.opt .cls button{padding:4px 10px;border-radius:99px;border:1px solid var(--line);font-size:11px;color:var(--ink2)}
+.opt .cls button{padding:6px 14px;border-radius:99px;border:1px solid var(--line);font-size:14px;font-weight:700;color:var(--ink2)}
 .opt .cls button.on{background:var(--cream);color:#0a0907;border-color:var(--cream)}
 
 /* itinerary, grouped by city with a floating diorama */
 .cityhead{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:30px;padding:70px 0 20px;min-height:340px}
 .cityhead .dio{position:relative;justify-self:end;width:min(100%,440px)}
 .cityhead .dio.big{width:min(100%,520px)}
-.cityhead h3{font-family:var(--serif);font-weight:700;font-size:clamp(56px,7vw,96px);line-height:.95;margin:8px 0 6px;color:var(--cream);text-shadow:0 8px 40px rgba(0,0,0,.65)}
-.cityhead .cd{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--cream)}
+.cityhead h3{font-family:var(--serif);font-weight:900;font-size:clamp(64px,8vw,112px);line-height:.95;margin:8px 0 6px;color:var(--cream);text-shadow:0 8px 40px rgba(0,0,0,.65)}
+.cityhead .cd{font-size:16px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--cream)}
 .cityhead .cd::after{content:"";display:block;width:40px;height:1px;background:var(--cream);opacity:.7;margin-top:14px}
-.cityhead .tagline{display:block;margin-top:22px;font-size:clamp(28px,3.2vw,42px);color:var(--cream);transform:rotate(-4deg);transform-origin:left}
-.cityhead .facts{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12px;color:var(--ink2);font-family:var(--mono)}
+.cityhead .tagline{display:block;margin-top:22px;font-size:clamp(36px,4.2vw,56px);color:var(--cream);transform:rotate(-4deg);transform-origin:left}
+.cityhead .facts{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:17px;font-weight:700;color:var(--ink2)}
 .cityhead .facts b{color:var(--cream);font-weight:500}
-.day{display:grid;grid-template-columns:190px 1fr;gap:20px 40px;padding:36px 0;border-top:1px dashed var(--line)}
+.day{display:grid;grid-template-columns:220px 1fr;gap:20px 40px;padding:36px 0;border-top:1px dashed var(--line)}
 .day .dl{position:sticky;top:120px;align-self:start}
-.day .dl .dn{font-family:var(--serif);font-weight:700;font-size:60px;line-height:.9;color:var(--cream)}
-.day .dl .dn small{font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:8px}
-.day .dl .dt{margin-top:10px;font-size:13px;color:var(--ink2)}
-.day .dl .dw{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:8px}
-.day .dl .temp{margin-top:16px}.day .dl .temp svg{width:100%;max-width:170px;height:44px;display:block}
-.day .dl .temp small{font-family:var(--mono);font-size:10px;color:var(--ink3)}
-.day h3{font-family:var(--serif);font-weight:600;font-size:26px;margin:0 0 12px;color:var(--cream)}
-.it{display:grid;grid-template-columns:64px 30px 1fr;gap:6px 14px;padding:14px 0;border-top:1px dashed var(--line);align-items:start;position:relative;transition:background .3s;border-radius:8px}
+.day .dl .dn{font-family:var(--serif);font-weight:900;font-size:76px;line-height:.9;color:var(--cream)}
+.day .dl .dn small{font-family:var(--sans);font-weight:800;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink2);display:block;margin-bottom:8px}
+.day .dl .dt{margin-top:10px;font-size:17px;font-weight:700;color:var(--ink)}
+.day .dl .dw{display:grid;gap:8px;margin-top:14px;font-size:19px;font-weight:800;color:var(--cream)}
+.day .dl .dw div{display:flex;align-items:center;gap:10px}.day .dl .dw span{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.day .dl .dw svg{width:26px;height:26px;fill:none;stroke:var(--saffron);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.day .dl .temp{margin-top:18px}.day .dl .temp svg{width:100%;max-width:220px;height:auto;display:block;overflow:visible}.day .dl .temp svg text{font-family:var(--mono);font-weight:700;font-size:11px;fill:var(--ink2)}
+.day .dl .temp small{display:block;margin-top:6px;font-size:13.5px;font-weight:600;color:var(--ink3);line-height:1.4}
+.day h3{font-family:var(--serif);font-weight:800;font-size:34px;margin:0 0 12px;color:var(--cream)}
+.it{display:grid;grid-template-columns:76px 34px 1fr;gap:6px 14px;padding:14px 0;border-top:1px dashed var(--line);align-items:start;position:relative;transition:background .3s;border-radius:8px}
 .it:hover,.it.hot{background:rgba(232,220,198,.035)}
-.it .t{font-family:var(--mono);font-size:12px;color:var(--ink2);padding-top:3px}
-.it .ic{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2);margin-top:-1px}
-.it .ic svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.it .t{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--ink);padding-top:3px}
+.it .ic{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2);margin-top:-1px}
+.it .ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .it.sight .ic{border-color:var(--c);color:var(--c)}
-.it .lb{font-size:15px;color:var(--cream);font-weight:400}.it .lb a{text-decoration:none;border-bottom:1px solid var(--line)}
-.it .m{grid-column:3;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink2);font-family:var(--mono)}
-.it .m span b{color:var(--cream);font-weight:500}
-.it .x{grid-column:3;font-size:12.5px;color:var(--ink3);max-width:64ch;display:none}.it.open .x{display:block}
-.it .alert{grid-column:3;font-size:12px;padding:8px 12px;border-radius:8px;background:rgba(246,178,107,.1);border:1px solid rgba(246,178,107,.3);color:#f6b26b}
-.daytot{grid-column:1/-1;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:12px;color:var(--ink2);font-family:var(--mono)}
+.it .lb{font-size:20px;color:var(--cream);font-weight:700}.it .lb a{text-decoration:none;border-bottom:1px solid var(--line)}
+.it .m{grid-column:3;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:16px;font-weight:700;color:var(--ink2)}
+.chip{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.chip svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--saffron);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.chip b{color:var(--cream)}
+.it.sight .chip svg{stroke:var(--c)}
+.it .m span b{color:var(--cream);font-weight:700}
+.it .x{grid-column:3;font-size:16px;font-weight:500;color:var(--ink2);max-width:64ch;display:none}.it.open .x{display:block}
+.it .alert{grid-column:3;font-size:15.5px;font-weight:600;padding:8px 12px;border-radius:8px;background:rgba(246,178,107,.1);border:1px solid rgba(246,178,107,.3);color:#f6b26b}
+.daytot{grid-column:1/-1;margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:16px;font-weight:700;color:var(--ink2)}
 .daytot b{color:var(--cream);font-weight:500}
 
 /* weather */
 .chart svg{width:100%;height:auto;display:block;overflow:visible}
-.chart .ax{stroke:var(--line)}.chart text{font-family:var(--mono);font-size:10px;fill:var(--ink3)}
+.chart .ax{stroke:var(--line)}.chart text{font-family:var(--mono);font-weight:700;font-size:14px;fill:var(--ink2)}
 .chart .sel{fill:rgba(232,220,198,.06)}.chart path{fill:none;stroke-width:1.6}.chart path.lo{stroke-dasharray:3 4;opacity:.7}
 .chart .mo{cursor:pointer}.chart .mo:hover rect{fill:rgba(232,220,198,.05)}
 .wx{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px}
-.wx .cn{font-family:var(--serif);font-weight:700;font-size:26px}
-.wx .big{font-family:var(--serif);font-weight:600;font-size:54px;line-height:1;margin:6px 0;color:var(--cream)}.wx .big small{font-size:22px;color:var(--ink3);font-weight:400}
-.wx ul{list-style:none;margin:10px 0 0;padding:0;font-size:13px;color:var(--ink2)}
-.wx li{padding:6px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px}.wx li b{font-weight:500;color:var(--cream);text-align:right}
+.wx .cn{font-family:var(--serif);font-weight:900;font-size:34px}
+.wx .big{font-family:var(--serif);font-weight:900;font-size:66px;line-height:1;margin:6px 0;color:var(--cream)}.wx .big small{font-size:28px;color:var(--ink3);font-weight:700}
+.wx ul{list-style:none;margin:10px 0 0;padding:0;font-size:16.5px;font-weight:600;color:var(--ink2)}
+.wx li{padding:9px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.wx li b{font-weight:800;color:var(--cream);text-align:right}
 .best{margin-top:40px}
 .best .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:12px}
-.best .months div{height:38px;border-radius:6px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#0a0907;cursor:pointer;transition:transform .3s var(--ease);position:relative}
+.best .months div{height:46px;border-radius:6px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:14px;color:#0a0907;cursor:pointer;transition:transform .3s var(--ease);position:relative}
 .best .months div:hover{transform:translateY(-3px)}.best .months div.on::after{content:"";position:absolute;inset:-3px;border:1px solid var(--cream);border-radius:9px}
 .lists{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
-.lists ul{list-style:none;padding:0;margin:12px 0 0;font-size:14px;color:var(--ink2)}
+.lists ul{list-style:none;padding:0;margin:12px 0 0;font-size:17.5px;font-weight:600;color:var(--ink2)}
 .lists li{padding:8px 0;border-top:1px dashed var(--line)}.lists li::before{content:"—";color:var(--saffron);margin-right:10px}
 
 /* traffic */
 .slider{display:flex;align-items:center;gap:16px;margin:20px 0 30px;flex-wrap:wrap}
 .slider input[type=range]{flex:1;min-width:220px;accent-color:var(--saffron)}
-.slider .now{font-family:var(--serif);font-weight:600;font-size:40px;min-width:120px;line-height:1;color:var(--cream)}
+.slider .now{font-family:var(--serif);font-weight:900;font-size:54px;min-width:120px;line-height:1;color:var(--cream)}
 .gauges{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.gauge .cn{font-family:var(--serif);font-weight:700;font-size:26px}
-.gauge .sp{font-family:var(--serif);font-weight:600;font-size:50px;line-height:1;margin:6px 0 4px;color:var(--cream)}.gauge .sp small{font-size:18px;color:var(--ink3);font-weight:400}
-.gauge .lvl{font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.gauge .cn{font-family:var(--serif);font-weight:900;font-size:34px}
+.gauge .sp{font-family:var(--serif);font-weight:900;font-size:62px;line-height:1;margin:6px 0 4px;color:var(--cream)}.gauge .sp small{font-size:22px;color:var(--ink3);font-weight:700}
+.gauge .lvl{font-size:14px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:8px}.gauge .lvl svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .gauge .bar24{display:flex;gap:2px;height:36px;align-items:flex-end;margin:12px 0}
 .gauge .bar24 i{flex:1;background:var(--ink3);opacity:.5;border-radius:2px 2px 0 0;transition:all .3s}.gauge .bar24 i.on{background:var(--saffron);opacity:1}
-.gauge p{font-size:12.5px;color:var(--ink3);margin:8px 0 12px}
-.gauge table{width:100%;border-collapse:collapse;font-size:12.5px}
+.gauge p{font-size:16px;font-weight:500;color:var(--ink2);margin:8px 0 12px}
+.gauge table{width:100%;border-collapse:collapse;font-size:16px;font-weight:600}
 .gauge td{padding:7px 0;border-top:1px dashed var(--line);color:var(--ink2)}.gauge td:last-child{text-align:right;font-family:var(--mono);color:var(--cream)}
 
 /* budget */
 .bud{display:grid;grid-template-columns:1fr 1.2fr;gap:50px}
-.choice{margin-bottom:22px}.choice .eyebrow{margin-bottom:8px}.choice .seg button{padding:7px 14px}
-.chk{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;color:var(--ink2);cursor:pointer;border-top:1px dashed var(--line)}
-.chk input{accent-color:var(--saffron);width:16px;height:16px}.chk span:last-child{margin-left:auto;font-family:var(--mono);font-size:12px}
-table.tot{width:100%;border-collapse:collapse;font-size:14px}
+.choice{margin-bottom:24px}.choice .eyebrow{margin-bottom:10px}.choice .seg button{padding:9px 16px}
+.chk{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:17.5px;font-weight:600;color:var(--ink2);cursor:pointer;border-top:1px dashed var(--line)}
+.chk input{accent-color:var(--saffron);width:20px;height:20px}.chk span:last-child{margin-left:auto;font-family:var(--mono);font-weight:700;font-size:15px}
+table.tot{width:100%;border-collapse:collapse;font-size:18px;font-weight:600}
 table.tot td{padding:11px 0;border-top:1px dashed var(--line);color:var(--ink2)}table.tot td:last-child{text-align:right;font-family:var(--mono);color:var(--cream)}
-table.tot tr.sum td{border-top:1px solid var(--cream);font-family:var(--serif);font-weight:700;font-size:30px;color:var(--cream);padding-top:16px}
+table.tot tr.sum td{border-top:1px solid var(--cream);font-family:var(--serif);font-weight:900;font-size:38px;color:var(--cream);padding-top:16px}
 table.tot tr.sum td:last-child{font-family:var(--serif)}
-.pp{font-size:13px;color:var(--ink3);margin-top:10px}
+.pp{font-size:17px;font-weight:600;color:var(--ink2);margin-top:12px}
 
 /* checklist + footer */
 .todo{columns:2;column-gap:40px}
-.todo label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line);font-size:14px;color:var(--ink2);break-inside:avoid;cursor:pointer}
-.todo input{accent-color:var(--saffron);margin-top:3px}.todo label.done{color:var(--ink3);text-decoration:line-through}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:99px;border:1px solid var(--line);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--cream);transition:all .3s;background:rgba(10,9,7,.5)}
+.todo label{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-top:1px dashed var(--line);font-size:18px;font-weight:600;color:var(--ink2);break-inside:avoid;cursor:pointer}
+.todo input{accent-color:var(--saffron);margin-top:5px;width:20px;height:20px}.todo label.done{color:var(--ink3);text-decoration:line-through}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:99px;border:1px solid var(--line);font-size:14px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--cream);transition:all .3s;background:rgba(10,9,7,.5)}
 .btn:hover{background:var(--cream);color:#0a0907}
 footer{position:relative;margin-top:60px;overflow:hidden}
 footer .sky{position:relative;height:clamp(160px,22vw,300px);background:url(img/skyline.jpg) center bottom/cover no-repeat;mask-image:linear-gradient(180deg,transparent,#000 40%);-webkit-mask-image:linear-gradient(180deg,transparent,#000 40%)}
 footer .fin{width:var(--w);margin:0 auto;padding:0 0 50px;position:relative}
 footer .closing{position:relative;margin-top:-60px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
-footer .closing .l{font-size:11px;letter-spacing:.5em;text-transform:uppercase;color:var(--ink2);line-height:1.9}
+footer .closing .l{font-size:15px;font-weight:800;letter-spacing:.45em;text-transform:uppercase;color:var(--ink);line-height:1.9}
 footer .closing .l::after{content:"";display:block;width:34px;height:1px;background:var(--saffron);margin-top:10px}
-footer .closing .r{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--ink2);text-align:right}
+footer .closing .r{font-size:15px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--ink);text-align:right}
 footer .tri{display:flex;width:56px;height:3px;margin:8px 0 0 auto}footer .tri i{flex:1}footer .tri i:nth-child(1){background:#ff9933}footer .tri i:nth-child(2){background:#eee}footer .tri i:nth-child(3){background:#138808}
-footer .stampb{font-family:var(--script);font-weight:600;color:var(--saffron);font-size:clamp(26px,3vw,40px);line-height:.95;text-align:center;transform:rotate(-10deg)}
-footer .src{margin-top:50px;border-top:1px solid var(--line);padding-top:26px;font-size:12px;color:var(--ink3)}
+footer .stampb{font-family:var(--script);font-weight:700;color:var(--saffron);font-size:clamp(32px,3.6vw,50px);line-height:.95;text-align:center;transform:rotate(-10deg)}
+footer .src{margin-top:50px;border-top:1px solid var(--line);padding-top:26px;font-size:15.5px;font-weight:500;color:var(--ink2)}
 footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer li{padding:3px 0;break-inside:avoid}footer a{color:var(--ink2);text-decoration:none}
-.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);z-index:60;padding:10px 16px;border-radius:99px;background:rgba(20,17,13,.95);border:1px solid var(--line);font-size:12px;opacity:0;transition:all .4s var(--ease);pointer-events:none}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);z-index:60;padding:12px 18px;border-radius:99px;background:rgba(20,17,13,.95);border:1px solid var(--line);font-size:15px;font-weight:700;opacity:0;transition:all .4s var(--ease);pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .rv{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.in{opacity:1;transform:none}
 
@@ -247,7 +251,7 @@ footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer 
   .hero .stage .dio.delhi{grid-column:1/-1;width:82%!important;margin:0 auto}.hero .stage .tag{display:none}
   .bar .in{gap:10px 14px}.bar nav{gap:12px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
   .opt{grid-template-columns:34px 1fr}.opt .fare{grid-column:2;text-align:left;margin-top:6px}
-  .it{grid-template-columns:52px 24px 1fr}.route text.city{font-size:15px}
+  .it{grid-template-columns:64px 28px 1fr}.route text.city{font-size:15px}
   footer .closing{margin-top:-20px}footer .stampb{width:100%;text-align:left;transform:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.grain{display:none}}
@@ -376,7 +380,12 @@ const T=window.TRIP, $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[.
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], MONL=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DOW=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const ICON={flight:'M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z',train:'M6 3h12a2 2 0 012 2v10a3 3 0 01-3 3H7a3 3 0 01-3-3V5a2 2 0 012-2zM4 10h16M8 21l1-3M16 21l-1-3M8 14h.01M16 14h.01',car:'M5 17h14M6 17l1.5-5h9L18 17M4 17v2h3v-2M17 17v2h3v-2M8 12l1-3h6l1 3',walk:'M13 4a1 1 0 100-2 1 1 0 000 2zM10 22l2-7-2-2 1-5 3 1 2 3h2M9 14l-2 4M14 15l2 3 1 4',sight:'M12 3l2 5h5l-4 3.5 1.5 5.5-4.5-3-4.5 3L9 11.5 5 8h5z',meal:'M6 3v8a2 2 0 002 2v8M8 3v6M10 3v6M17 3c-2 0-3 3-3 6v3h3v9',free:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 8v4l3 2',metro:'M12 3C8 3 5 4 5 7v9a3 3 0 003 3h8a3 3 0 003-3V7c0-3-3-4-7-4zM5 11h14M8 21l-1 1M16 21l1 1M9 15h.01M15 15h.01'};
+const ICON={flight:'M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z',train:'M6 3h12a2 2 0 012 2v10a3 3 0 01-3 3H7a3 3 0 01-3-3V5a2 2 0 012-2zM4 10h16M8 21l1-3M16 21l-1-3M8 14h.01M16 14h.01',car:'M5 17h14M6 17l1.5-5h9L18 17M4 17v2h3v-2M17 17v2h3v-2M8 12l1-3h6l1 3',walk:'M13 4a1 1 0 100-2 1 1 0 000 2zM10 22l2-7-2-2 1-5 3 1 2 3h2M9 14l-2 4M14 15l2 3 1 4',sight:'M12 3l2 5h5l-4 3.5 1.5 5.5-4.5-3-4.5 3L9 11.5 5 8h5z',meal:'M6 3v8a2 2 0 002 2v8M8 3v6M10 3v6M17 3c-2 0-3 3-3 6v3h3v9',free:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 8v4l3 2',metro:'M12 3C8 3 5 4 5 7v9a3 3 0 003 3h8a3 3 0 003-3V7c0-3-3-4-7-4zM5 11h14M8 21l-1 1M16 21l1 1M9 15h.01M15 15h.01',
+thermo:'M14 14.8V5a2 2 0 10-4 0v9.8a4 4 0 104 0zM12 10v6',sunrise:'M12 2v3M4.9 7.9l1.4 1.4M19.1 7.9l-1.4 1.4M2 17h20M6 17a6 6 0 0112 0M9 8l3-3 3 3',sunset:'M12 2v3M4.9 7.9l1.4 1.4M19.1 7.9l-1.4 1.4M2 17h20M6 17a6 6 0 0112 0M9 5l3 3 3-3',
+clock:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2',road:'M4 20L9 4h6l5 16M12 4v3M12 10v3M12 16v4',ticket:'M3 8a2 2 0 002 2 2 2 0 010 4 2 2 0 00-2 2v2h18v-2a2 2 0 00-2-2 2 2 0 010-4 2 2 0 002-2V6H3zM14 6v12',
+money:'M3 6h18v12H3zM12 15a3 3 0 100-6 3 3 0 000 6zM6 9h.01M18 15h.01',gauge:'M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-4M9 16h6',rain:'M7 15a5 5 0 010-10 6 6 0 0111.5 2A4 4 0 0117 15H7zM8 18l-1 3M12 18l-1 3M16 18l-1 3',
+wind:'M3 8h10a2 2 0 100-2M3 12h15a2 2 0 110 2M3 16h9a2 2 0 110 2',pin:'M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11zM12 12a2 2 0 100-4 2 2 0 000 4',calendar:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',bed:'M3 18V8M3 12h18v6M3 16h18M7 12V9h4v3'};
+const chip=(k,txt)=>`<span class="chip">${svg(k)}<span>${txt}</span></span>`;
 const svg=k=>`<svg viewBox="0 0 24 24"><path d="${ICON[k]||ICON.free}"/></svg>`;
 
 /* ───── state ───── */
@@ -460,17 +469,17 @@ function renderDays(){
   let prevCity=null;
   $('#dayList').innerHTML=T.days.map(day=>{ const d=dayDate(day.n); const c=T.cities[day.city];
     let head=''; if(day.city!==prevCity && T.days.filter(x=>x.city===day.city).length>1){ prevCity=day.city; const cl=c.climate, m=month(); const mySights=T.sights.filter(x=>x.city===day.city); const feeSum=mySights.filter(x=>!x.optional).reduce((a,x)=>a+x.fee[S.cit],0); const nDays=T.days.filter(x=>x.city===day.city&&x.items.some(i=>i.kind==='sight')).length;
-      head=`<div class="cityhead"><div><div class="eyebrow rule">${c.days} · ${c.state}</div><h3>${c.name}</h3><div class="cd">${nDays} days</div><span class="script tagline" style="color:var(--cream)">${CITYTAG[day.city]||''}</span><div class="facts"><span><b>${cl.hi[m]}°/${cl.lo[m]}°</b> in ${MONL[m]}</span><span><b>${mySights.length}</b> sights</span><span>entry <b>${money(feeSum)}</b> pp</span><span>base: <b>${c.stay.name}</b></span></div></div><div class="dio tilt ${day.city==='delhi'?'big':''}" data-p="${day.city==='delhi'?6:10}"><img src="img/${day.city}.webp" alt="${c.name} diorama" loading="lazy"></div></div>`; }
+      head=`<div class="cityhead"><div><div class="eyebrow rule">${c.days} · ${c.state}</div><h3>${c.name}</h3><div class="cd">${nDays} days</div><span class="script tagline" style="color:var(--cream)">${CITYTAG[day.city]||''}</span><div class="facts">${chip('thermo',`<b>${Math.round(cl.hi[m])}° / ${Math.round(cl.lo[m])}°</b> in ${MONL[m]}`)}${chip('sight',`<b>${mySights.length}</b> sights`)}${chip('ticket',`entry <b>${money(feeSum)}</b> pp`)}${chip('bed',`base <b>${c.stay.name}</b>`)}</div></div><div class="dio tilt ${day.city==='delhi'?'big':''}" data-p="${day.city==='delhi'?6:10}"><img src="img/${day.city}.webp" alt="${c.name} diorama" loading="lazy"></div></div>`; }
     else if(day.city!==prevCity) prevCity=day.city; let rideCost=0,fees=0,km=0; const rows=day.items.map(it=>{ const t=hm(it.t); const temp=tempAt(it.cityRef||day.city,it.t); let ic=it.kind,lb=it.label||'',meta=[],x='',alert='',cls='';
-      if(it.kind==='sight'){ const s=SIGHT[it.ref]; lb=`<a href="#" data-sight="${s.id}">${it.label||s.name}</a>`; const fee=s.fee[S.cit]; const first=!sightsSeen.has(s.id); sightsSeen.add(s.id); if(first&&!it.short) fees+=fee; meta=[`<span>entry <b>${fee?money(fee):'free'}</b></span>`,`<span>~${dur(it.short?60:s.dur)}</span>`,`<span>${Math.round(hav(c.stay,s)*1.3)} km from base</span>`,`<span><b>${temp}°C</b> at ${t}</span>`]; x=s.blurb+(s.feeNote?` · ${s.feeNote}`:''); cls=`sight" style="--c:${c.accent}`; const dow=DOW[d.getDay()]; if(s.closed.toLowerCase().includes(dow.toLowerCase())) alert=`<div class="alert">${s.name} is closed on ${dow}s and Day ${day.n} falls on a ${dow}. Shift the departure date, or swap this with another day.</div>`; }
-      else if(it.kind==='ride'){ const h=hop(it,day); km+=h.km; rideCost+=h.fare[0]; ic=it.metro?'metro':'car'; meta=[`<span><b>${h.km} km</b> by road</span>`,`<span><b>${dur(h.mins)}</b>${h.metro?' door to door':h.cong>.6?' <i class="warn">heavy traffic</i>':h.cong>.35?' moderate traffic':' light traffic'}</span>`,`<span>${h.metro?'metro':it.fixed?'fixed cab':'Uber est.'} <b>${range(...h.fare)}</b></span>`,`<span>${temp}°C</span>`]; if(!h.metro&&!it.fixed) x=`Estimated at ${t}: ${h.sp} km/h typical speed, surge ×${h.surge.toFixed(2)}. Per-km and per-minute rates for a UberGo-class car in ${ctxName(it,day)}.`; }
-      else if(it.kind==='flight'||it.kind==='train'){ const leg=T.legs.find(l=>l.id===it.ref); const o=leg.options[S.legs[leg.id]]; ic=o.mode; lb=o.name; meta=[`<span class="mono">${o.dep} → ${o.arr}</span>`,`<span>${dur(o.mins)}</span>`,`<span><b>${money(legFare(leg))}</b> pp</span>`]; x=o.note; }
-      else if(it.kind==='walk'){ meta=[`<span>${temp}°C</span>`]; }
-      else { meta=[`<span>${temp}°C at ${t}</span>`]; }
+      if(it.kind==='sight'){ const s=SIGHT[it.ref]; lb=`<a href="#" data-sight="${s.id}">${it.label||s.name}</a>`; const fee=s.fee[S.cit]; const first=!sightsSeen.has(s.id); sightsSeen.add(s.id); if(first&&!it.short) fees+=fee; meta=[chip('ticket',fee?money(fee):'free entry'),chip('clock','~'+dur(it.short?60:s.dur)),chip('pin',Math.round(hav(c.stay,s)*1.3)+' km from base'),chip('thermo',`${temp}°C at ${t}`)]; x=s.blurb+(s.feeNote?` · ${s.feeNote}`:''); cls=`sight" style="--c:${c.accent}`; const dow=DOW[d.getDay()]; if(s.closed.toLowerCase().includes(dow.toLowerCase())) alert=`<div class="alert">${s.name} is closed on ${dow}s and Day ${day.n} falls on a ${dow}. Shift the departure date, or swap this with another day.</div>`; }
+      else if(it.kind==='ride'){ const h=hop(it,day); km+=h.km; rideCost+=h.fare[0]; ic=it.metro?'metro':'car'; meta=[chip('road',`${h.km} km by road`),chip('clock',dur(h.mins)),chip('gauge',h.metro?'metro, no traffic':h.cong>.6?'<i class="warn">heavy traffic</i>':h.cong>.35?'moderate traffic':'light traffic'),chip('money',`${h.metro?'metro':it.fixed?'fixed cab':'Uber est.'} ${range(...h.fare)}`),chip('thermo',`${temp}°C`)]; if(!h.metro&&!it.fixed) x=`Estimated at ${t}: ${h.sp} km/h typical speed, surge ×${h.surge.toFixed(2)}. Per-km and per-minute rates for a UberGo-class car in ${ctxName(it,day)}.`; }
+      else if(it.kind==='flight'||it.kind==='train'){ const leg=T.legs.find(l=>l.id===it.ref); const o=leg.options[S.legs[leg.id]]; ic=o.mode; lb=o.name; meta=[chip('clock',`${o.dep} → ${o.arr} · ${dur(o.mins)}`),chip('money',`${money(legFare(leg))} per person`)]; x=o.note; }
+      else { meta=[chip('thermo',`${temp}°C at ${t}`)]; }
       return `<div class="it ${cls}" data-kind="${it.kind}"><div class="t">${t}</div><div class="ic">${svg(ic)}</div><div class="lb">${lb}</div><div class="m">${meta.join('')}</div>${x?`<div class="x">${x}</div>`:''}${alert}</div>`; }).join('');
     const lo=T.cities[day.city].climate.lo[month()], hi=T.cities[day.city].climate.hi[month()]; const sr=sun(c.lat,c.lng,d);
-    const spark=(()=>{ const pts=[]; for(let h=0;h<=23;h++){ pts.push(`${h/23*170},${44-((tempAt(day.city,h)-lo)/(hi-lo||1))*36-4}`);} return `<svg viewBox="0 0 170 44"><polyline points="${pts.join(' ')}" fill="none" stroke="${c.accent}" stroke-width="1.5"/>${day.items.filter(i=>i.kind==='sight').map(i=>`<circle cx="${i.t/23*170}" cy="${44-((tempAt(day.city,i.t)-lo)/(hi-lo||1))*36-4}" r="2.5" fill="#fff"/>`).join('')}</svg>`; })();
-    return `${head}<div class="day"><div class="dl"><div class="dn"><small>Day</small>${day.n}</div><div class="dt">${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]} · ${c.name}</div><div class="dw">${lo}°–${hi}°C · sunrise ${hm(sr.rise)} · sunset ${hm(sr.set)}</div><div class="temp">${spark}<small>hourly temperature, dots = your sights</small></div></div><div><h3>${day.title}</h3>${rows}<div class="daytot"><span>rides <b>${km.toFixed(0)} km</b></span><span>ride spend <b>≈ ${money(rideCost)}</b></span><span>entry fees <b>${money(fees)}</b> pp</span></div></div></div>`; }).join('');
+    const spark=(()=>{ const W=220,H=80,L=30,B=16; const yy=v=>B+((hi-v)/(hi-lo||1))*(H-B-18); const pts=[]; for(let h=0;h<=23;h++) pts.push(`${L+h/23*(W-L)},${yy(tempAt(day.city,h))}`);
+      return `<svg viewBox="0 0 ${W} ${H}"><text x="0" y="${B+4}">${Math.round(hi)}°</text><text x="0" y="${H-14}">${Math.round(lo)}°</text>${[6,12,18].map(h=>`<text x="${L+h/23*(W-L)}" y="${H-2}" text-anchor="middle">${h}h</text>`).join('')}<polyline points="${pts.join(' ')}" fill="none" stroke="${c.accent}" stroke-width="2.5"/>${day.items.filter(i=>i.kind==='sight').map(i=>`<circle cx="${L+i.t/23*(W-L)}" cy="${yy(tempAt(day.city,i.t))}" r="4" fill="#fff" stroke="${c.accent}" stroke-width="2"/>`).join('')}</svg>`; })();
+    return `${head}<div class="day"><div class="dl"><div class="dn"><small>Day</small>${day.n}</div><div class="dt">${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]} · ${c.name}</div><div class="dw"><div>${svg('thermo')}<b>${Math.round(lo)}° – ${Math.round(hi)}°C</b></div><div>${svg('sunrise')}<b>${hm(sr.rise)}</b><span>sunrise</span></div><div>${svg('sunset')}<b>${hm(sr.set)}</b><span>sunset</span></div></div><div class="temp">${spark}<small>Temperature through the day. Dots are your sights.</small></div></div><div><h3>${day.title}</h3>${rows}<div class="daytot">${chip('road',`<b>${km.toFixed(0)} km</b> of rides`)}${chip('money',`ride spend <b>≈ ${money(rideCost)}</b>`)}${chip('ticket',`entry fees <b>${money(fees)}</b> per person`)}</div></div></div>`; }).join('');
   bindMotion();
   $$('#dayList .it').forEach(el=>{ el.addEventListener('click',e=>{ const a=e.target.closest('[data-sight]'); if(a){ e.preventDefault(); focusSight(a.dataset.sight); return; } el.classList.toggle('open'); }); el.addEventListener('mouseenter',()=>{ const a=$('[data-sight]',el); if(a&&map&&layerSights[a.dataset.sight]) layerSights[a.dataset.sight].setStyle({radius:9}); }); el.addEventListener('mouseleave',()=>{ const a=$('[data-sight]',el); if(a&&map&&layerSights[a.dataset.sight]) layerSights[a.dataset.sight].setStyle({radius:5}); }); });
 }
@@ -487,7 +496,7 @@ function renderWeather(){
   g+=cities.map((c,i)=>`<g transform="translate(${L+i*300},${H+4})"><line x1="0" x2="18" y1="0" y2="0" stroke="${c.accent}" stroke-width="1.6"/><text x="24" y="3">${c.name} high · dashed low</text></g>`).join('');
   $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H+16}">${g}</svg>`;
   $$('#chart .mo').forEach(el=>el.addEventListener('click',()=>setMonth(+el.dataset.m)));
-  $('#wx').innerHTML=cities.map(c=>{ const cl=c.climate; const d=dayDate({agra:1,delhi:3,varanasi:7}[Object.keys(T.cities).find(k=>T.cities[k]===c)]); const sr=sun(c.lat,c.lng,d); const a=c.aqi[m]; return `<div><div class="cn" style="color:${c.accent}">${c.name}</div><div class="big">${cl.hi[m]}°<small> / ${cl.lo[m]}°</small></div><ul><li>Rain in ${MONL[m]}<b>${cl.rain[m]} mm${cl.rain[m]>150?' · monsoon':cl.rain[m]<15?' · dry':''}</b></li><li>Air quality, typical<b class="${a>=4?'bad':a===3?'warn':'ok'}">${AQL[a]}</b></li><li>Sunrise on your day<b>${hm(sr.rise)}</b></li><li>Sunset<b>${hm(sr.set)}</b></li><li>Feels like<b>${cl.hi[m]>=38?'brutal afternoons':cl.hi[m]>=33?'hot, plan mornings':cl.lo[m]<=10?'cold mornings, fine days':'ideal'}</b></li></ul></div>`; }).join('');
+  $('#wx').innerHTML=cities.map(c=>{ const cl=c.climate; const d=dayDate({agra:1,delhi:3,varanasi:7}[Object.keys(T.cities).find(k=>T.cities[k]===c)]); const sr=sun(c.lat,c.lng,d); const a=c.aqi[m]; return `<div><div class="cn" style="color:${c.accent}">${c.name}</div><div class="big">${cl.hi[m]}°<small> / ${cl.lo[m]}°</small></div><ul><li>${chip('rain','Rain in '+MONL[m])}<b>${cl.rain[m]} mm${cl.rain[m]>150?' · monsoon':cl.rain[m]<15?' · dry':''}</b></li><li>${chip('wind','Air quality, typical')}<b class="${a>=4?'bad':a===3?'warn':'ok'}">${AQL[a]}</b></li><li>${chip('sunrise','Sunrise on your day')}<b>${hm(sr.rise)}</b></li><li>${chip('sunset','Sunset')}<b>${hm(sr.set)}</b></li><li>${chip('thermo','Feels like')}<b>${cl.hi[m]>=38?'brutal afternoons':cl.hi[m]>=33?'hot, plan mornings':cl.lo[m]<=10?'cold mornings, fine days':'ideal'}</b></li></ul></div>`; }).join('');
   const score=i=>{ const hi=Math.max(...cities.map(c=>c.climate.hi[i])), rain=Math.max(...cities.map(c=>c.climate.rain[i])), aq=Math.max(...cities.map(c=>c.aqi[i])); let s=5; if(hi>=38) s-=3; else if(hi>=34) s-=1.5; if(rain>150) s-=2; else if(rain>80) s-=1; if(aq>=5) s-=1.5; else if(aq>=4) s-=.5; return clamp(s,0,5); };
   const col=s=>s>=4.5?'#8fd3a8':s>=3.5?'#cfe08a':s>=2.5?'#e0b45a':s>=1.5?'#f28c28':'#f28c8c';
   $('#months').innerHTML=[...Array(12)].map((_,i)=>`<div class="${i===m?'on':''}" data-m="${i}" style="background:${col(score(i))}" title="${MONL[i]}">${MON[i]}</div>`).join('');
@@ -504,7 +513,7 @@ const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${Str
 const SAMPLE={agra:[['Agra Cantt → Taj Ganj','hub','stay'],['Taj Ganj → Agra Fort','stay','fort'],['Taj → Fatehpur Sikri','taj','sikri']],delhi:[['T3 → Connaught Place','hub','stay'],['CP → Nizamuddin station','stay','rail'],['CP → Qutub Minar','stay','qutub']],varanasi:[['Airport → Assi Ghat','hub','stay'],['Assi → Kashi Vishwanath','stay','kashi'],['Kashi → Sarnath','kashi','sarnath']]};
 function renderTraffic(){
   const h=S.hour; $('#clock').textContent=hm(h); const now=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000); $('#nowpill').innerHTML=`<i></i>India time now ${hm(now.getHours()+now.getMinutes()/60)}`;
-  $('#gauges').innerHTML=Object.entries(T.cities).map(([k,c])=>{ const sp=c.traffic.speeds[h], mx=Math.max(...c.traffic.speeds), mn=Math.min(...c.traffic.speeds); const cong=(mx-sp)/(mx-mn); const lvl=cong>.7?['Gridlock','bad']:cong>.45?['Heavy','warn']:cong>.2?['Moving',''] :['Free flowing','ok']; return `<div class="gauge"><div class="cn" style="color:${c.accent}">${c.name}</div><div class="sp">${sp}<small> km/h</small></div><div class="lvl ${lvl[1]}">${lvl[0]} · surge ≈ ×${(1+(c.ride.peak-1)*cong).toFixed(2)}</div><div class="bar24">${c.traffic.speeds.map((s,i)=>`<i class="${i===h?'on':''}" style="height:${s/mx*100}%" title="${hm(i)} · ${s} km/h"></i>`).join('')}</div><p>${c.traffic.note}</p><table>${SAMPLE[k].map(([n,a,b])=>{ const r=ride(k,Math.round(hav(pt(a,k),pt(b,k))*1.3*10)/10,h,null); return `<tr><td>${n}<br><span style="font-size:11px;color:var(--ink3)">${r.km} km · ${dur(r.mins)}</span></td><td>${money(r.fare[0])}</td></tr>`; }).join('')}</table></div>`; }).join('');
+  $('#gauges').innerHTML=Object.entries(T.cities).map(([k,c])=>{ const sp=c.traffic.speeds[h], mx=Math.max(...c.traffic.speeds), mn=Math.min(...c.traffic.speeds); const cong=(mx-sp)/(mx-mn); const lvl=cong>.7?['Gridlock','bad']:cong>.45?['Heavy','warn']:cong>.2?['Moving',''] :['Free flowing','ok']; return `<div class="gauge"><div class="cn" style="color:${c.accent}">${c.name}</div><div class="sp">${sp}<small> km/h</small></div><div class="lvl ${lvl[1]}">${svg('gauge')} ${lvl[0]} · surge ≈ ×${(1+(c.ride.peak-1)*cong).toFixed(2)}</div><div class="bar24">${c.traffic.speeds.map((s,i)=>`<i class="${i===h?'on':''}" style="height:${s/mx*100}%" title="${hm(i)} · ${s} km/h"></i>`).join('')}</div><p>${c.traffic.note}</p><table>${SAMPLE[k].map(([n,a,b])=>{ const r=ride(k,Math.round(hav(pt(a,k),pt(b,k))*1.3*10)/10,h,null); return `<tr><td>${n}<br><span style="font-size:14px;font-weight:600;color:var(--ink3)">${r.km} km · ${dur(r.mins)}</span></td><td>${money(r.fare[0])}</td></tr>`; }).join('')}</table></div>`; }).join('');
 }
 
 /* ───── budget ───── */
@@ -521,7 +530,7 @@ function renderBudget(){
   const hotels=T.budget.hotels[S.hotel].night*9*rooms, food=T.budget.food[S.food].day*10*n, extras=[...S.extras].reduce((s,i)=>s+T.budget.extras[i].pp,0)*n;
   const rows=[['Flights',flights*n,`${T.legs.filter(l=>l.options[S.legs[l.id]].mode==='flight').length} legs × ${n}`],['Trains',trains*n,'mid fare, chosen class'],['Rides & cabs',rides,'shared, every hop'],['Entry fees',fees*n,`${S.cit?'foreign':'Indian'} tickets × ${n}`],['Hotels',hotels,`${rooms} room${rooms>1?'s':''} × 9 nights`],['Food',food,`${n} × 10 days`],['Extras',extras,'']];
   const sub=rows.reduce((s,r)=>s+r[1],0), buffer=Math.round(sub*.1), total=sub+buffer;
-  $('#tot').innerHTML=rows.map(r=>`<tr><td>${r[0]}<br><span style="font-size:11px;color:var(--ink3)">${r[2]}</span></td><td>${money(r[1])}</td></tr>`).join('')+`<tr><td>Buffer 10%</td><td>${money(buffer)}</td></tr><tr class="sum"><td>Total</td><td>${money(total)}</td></tr>`;
+  $('#tot').innerHTML=rows.map(r=>`<tr><td>${r[0]}<br><span style="font-size:14px;font-weight:600;color:var(--ink3)">${r[2]}</span></td><td>${money(r[1])}</td></tr>`).join('')+`<tr><td>Buffer 10%</td><td>${money(buffer)}</td></tr><tr class="sum"><td>Total</td><td>${money(total)}</td></tr>`;
   $('#pp').innerHTML=`<b>${money(total/n)}</b> per person · ${S.cur==='INR'?'about $'+Math.round(total/n/T.currency.usd).toLocaleString():'about ₹'+Math.round(total/n).toLocaleString('en-IN')} · ${S.cur==='INR'?'':'at ₹'+T.currency.usd+' per dollar · '}${Math.round(total/n/10).toLocaleString('en-IN')} ${S.cur==='INR'?'₹':'$'} a day`;
 }
 
