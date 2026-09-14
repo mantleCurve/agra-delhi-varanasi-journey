@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Agra · Delhi · Varanasi — The Journey, Planned</title>
+<meta name="description" content="A living itinerary: real distances, trains, flights, fares, ride estimates, traffic, weather and budget for 10 days through Agra, Delhi and Varanasi.">
+<meta name="theme-color" content="#0c0a08">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230c0a08'/%3E%3Cpath d='M14 40 Q32 10 50 40' fill='none' stroke='%23f28c28' stroke-width='4' stroke-dasharray='6 5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root{--bg:#0c0a08;--bg2:#120f0c;--ink:#f0e6d6;--ink2:rgba(240,230,214,.7);--ink3:rgba(240,230,214,.42);--line:rgba(240,230,214,.14);--saffron:#f28c28;--teal:#3aa7b8;--gold:#e0b45a;--serif:"Instrument Serif",Georgia,serif;--sans:Inter,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--ease:cubic-bezier(.19,1,.22,1);--w:min(1240px,100% - 2*clamp(18px,4vw,64px))}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:var(--sans);font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}button,select,input{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+::selection{background:var(--saffron);color:#0c0a08}
+.serif{font-family:var(--serif);font-weight:400}
+.mono{font-family:var(--mono);font-size:.82em;letter-spacing:.02em}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+.num{font-family:var(--serif);font-size:1.15em;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-.015em;margin:14px 0 22px}
+h2 em{font-style:italic;color:var(--saffron)}
+section{position:relative;width:var(--w);margin:0 auto;padding:clamp(64px,9vw,120px) 0}
+section+section::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line)}
+.lead{max-width:56ch;font-size:clamp(16px,1.3vw,19px);color:var(--ink2)}
+.grid{display:grid;gap:clamp(20px,4vw,56px)}
+.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;border:1px solid var(--line);font-size:12px;color:var(--ink2);white-space:nowrap}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--c,var(--saffron))}
+.warn{color:#f6b26b}.ok{color:#8fd3a8}.bad{color:#f28c8c}
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 40% at 15% 0%,rgba(242,140,40,.10),transparent 60%),radial-gradient(50% 40% at 90% 90%,rgba(58,167,184,.08),transparent 60%)}
+main{position:relative;z-index:1}
+
+/* controls bar */
+.bar{position:sticky;top:0;z-index:30;background:rgba(12,10,8,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .in{width:var(--w);margin:0 auto;display:flex;align-items:center;gap:14px 22px;padding:10px 0;flex-wrap:wrap}
+.bar .brand{font-family:var(--serif);font-size:20px;margin-right:auto;letter-spacing:.02em}
+.bar .brand b{color:var(--saffron);font-weight:400}
+.ctl{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
+.ctl label{letter-spacing:.14em;text-transform:uppercase;font-size:10px;color:var(--ink3)}
+.ctl input[type=date],.ctl select{background:transparent;border:0;border-bottom:1px solid var(--line);padding:4px 2px;color:var(--ink);font-size:13px;outline:0;color-scheme:dark}
+.ctl select option{background:#161310}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.seg button{padding:5px 11px;font-size:11px;letter-spacing:.08em;color:var(--ink2);transition:all .25s}
+.seg button.on{background:var(--ink);color:#0c0a08}
+.stepper{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:99px}
+.stepper button{width:28px;height:26px;font-size:16px;color:var(--ink2)}.stepper b{font-weight:500;min-width:20px;text-align:center;font-size:13px}
+.bar nav{display:flex;gap:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);width:100%}
+.bar nav a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}.bar nav a:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding-top:clamp(50px,7vw,100px)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10.5vw,160px);line-height:.9;letter-spacing:-.02em;margin:10px 0 24px}
+.hero h1 span{display:block}.hero h1 .d{display:inline-block;width:.14em;height:.14em;border-radius:50%;vertical-align:middle;margin:0 .15em}
+.hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.6vw,34px);color:var(--ink2)}
+.route{margin-top:clamp(36px,5vw,64px);position:relative}
+.route svg{width:100%;height:auto;display:block;overflow:visible}
+.route .dash{stroke:var(--saffron);stroke-width:1.5;fill:none;stroke-dasharray:6 6;animation:march 1.4s linear infinite}
+@keyframes march{to{stroke-dashoffset:-24}}
+.route .node{cursor:pointer}
+.route text{font-family:var(--sans);fill:var(--ink2);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.route text.k{font-family:var(--mono);fill:var(--ink3);font-size:10px;letter-spacing:.02em;text-transform:none}
+.route text.city{font-family:var(--serif);font-size:22px;fill:var(--ink);letter-spacing:0;text-transform:none}
+.live{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;font-size:13px;color:var(--ink2)}
+.live div{display:flex;align-items:center;gap:10px}
+.live b{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink)}
+.live .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.live small{font-size:11px;color:var(--ink3);letter-spacing:.06em}
+
+/* map */
+.mapwrap{position:relative;width:100%;height:clamp(420px,70vh,720px);border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+#leafmap{position:absolute;inset:0;background:#0d0c0a}
+.leaflet-tile{filter:invert(1) hue-rotate(190deg) brightness(.72) contrast(.9) saturate(.35) sepia(.25)}
+.leaflet-container{font-family:var(--sans)}
+.leaflet-popup-content-wrapper{background:rgba(16,14,11,.94);color:var(--ink);border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.leaflet-popup-tip{background:rgba(16,14,11,.94)}
+.leaflet-popup-content{margin:14px 16px;font-size:13px;line-height:1.5}
+.leaflet-popup-content b{font-family:var(--serif);font-size:18px;font-weight:400;display:block;margin-bottom:4px}
+.leaflet-popup-content .k{font-family:var(--mono);font-size:11px;color:var(--ink3);display:block;margin-top:6px}
+.leaflet-control-attribution{background:rgba(12,10,8,.7)!important;color:var(--ink3)!important;font-size:10px}
+.leaflet-control-attribution a{color:var(--ink2)!important}
+.leaflet-bar a{background:rgba(16,14,11,.9)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.maplegend{position:absolute;left:14px;bottom:14px;z-index:500;display:flex;flex-wrap:wrap;gap:8px}
+.maplegend .pill{background:rgba(12,10,8,.75);backdrop-filter:blur(8px)}
+.mapstats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:22px;font-size:13px;color:var(--ink2)}
+.mapstats b{font-family:var(--serif);font-weight:400;font-size:30px;color:var(--ink);display:block;line-height:1}
+.mapstats small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+
+/* legs */
+.leg{display:grid;grid-template-columns:150px 1fr;gap:20px 40px;padding:30px 0;border-top:1px solid var(--line)}
+.leg:last-child{border-bottom:1px solid var(--line)}
+.leg .who{font-family:var(--serif);font-size:30px;line-height:1.05}
+.leg .who small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-top:8px}
+.leg .who .km{display:block;font-family:var(--mono);font-size:12px;color:var(--ink2);margin-top:10px}
+.opt{display:grid;grid-template-columns:38px 1fr auto;gap:8px 18px;align-items:center;padding:14px 0;border-top:1px dashed var(--line);cursor:pointer;transition:opacity .3s}
+.opt:first-child{border-top:0}
+.opt.off{opacity:.42}
+.opt .ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2)}
+.opt.on .ic{background:var(--saffron);border-color:var(--saffron);color:#0c0a08}
+.opt .ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.opt .nm{font-size:15px;font-weight:500;color:var(--ink)}
+.opt .meta{grid-column:2;font-size:12.5px;color:var(--ink2)}
+.opt .meta .mono{color:var(--ink)}
+.opt .note{grid-column:2;font-size:12px;color:var(--ink3);max-width:60ch}
+.opt .fare{font-family:var(--serif);font-size:26px;text-align:right;line-height:1}
+.opt .fare small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-top:6px}
+.opt .cls{grid-column:2;display:flex;gap:8px;margin-top:4px}
+.opt .cls button{padding:4px 10px;border-radius:99px;border:1px solid var(--line);font-size:11px;color:var(--ink2)}
+.opt .cls button.on{background:var(--ink);color:#0c0a08;border-color:var(--ink)}
+
+/* itinerary */
+.day{display:grid;grid-template-columns:190px 1fr;gap:20px 40px;padding:40px 0;border-top:1px solid var(--line)}
+.day .dl{position:sticky;top:120px;align-self:start}
+.day .dl .dn{font-family:var(--serif);font-size:64px;line-height:.9;letter-spacing:-.02em}
+.day .dl .dn small{font-size:16px;letter-spacing:.2em;text-transform:uppercase;font-family:var(--sans);color:var(--ink3);display:block;margin-bottom:6px}
+.day .dl .dt{margin-top:10px;font-size:13px;color:var(--ink2)}
+.day .dl .dw{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:8px}
+.day .dl .temp{margin-top:16px}
+.day .dl .temp svg{width:100%;max-width:170px;height:44px;display:block}
+.day .dl .temp small{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.day h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:0 0 14px;letter-spacing:-.01em}
+.it{display:grid;grid-template-columns:64px 30px 1fr;gap:6px 14px;padding:14px 0;border-top:1px dashed var(--line);align-items:start;position:relative;transition:background .3s;border-radius:8px}
+.it:hover,.it.hot{background:rgba(240,230,214,.035)}
+.it .t{font-family:var(--mono);font-size:12px;color:var(--ink2);padding-top:3px}
+.it .ic{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink2);margin-top:-1px}
+.it .ic svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.it.sight .ic{border-color:var(--c);color:var(--c)}
+.it .lb{font-size:15px;color:var(--ink);font-weight:400}
+.it .lb a{text-decoration:none;border-bottom:1px solid var(--line)}
+.it .m{grid-column:3;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink2);font-family:var(--mono)}
+.it .m span b{color:var(--ink);font-weight:500}
+.it .x{grid-column:3;font-size:12.5px;color:var(--ink3);max-width:64ch;display:none}
+.it.open .x{display:block}
+.it .alert{grid-column:3;font-size:12px;padding:8px 12px;border-radius:8px;background:rgba(246,178,107,.1);border:1px solid rgba(246,178,107,.3);color:#f6b26b}
+.daytot{grid-column:1/-1;margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:12px;color:var(--ink2);font-family:var(--mono)}
+.daytot b{color:var(--ink);font-weight:500}
+
+/* weather */
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .ax{stroke:var(--line)}.chart text{font-family:var(--mono);font-size:10px;fill:var(--ink3)}
+.chart .sel{fill:rgba(240,230,214,.06)}
+.chart path{fill:none;stroke-width:1.6}.chart path.lo{stroke-dasharray:3 4;opacity:.7}
+.chart .mo{cursor:pointer}.chart .mo:hover rect{fill:rgba(240,230,214,.05)}
+.wx{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px}
+.wx .cn{font-family:var(--serif);font-size:28px}
+.wx .big{font-family:var(--serif);font-size:56px;line-height:1;margin:6px 0}
+.wx .big small{font-size:22px;color:var(--ink3)}
+.wx ul{list-style:none;margin:10px 0 0;padding:0;font-size:13px;color:var(--ink2)}
+.wx li{padding:6px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between;gap:12px}
+.wx li b{font-weight:500;color:var(--ink);text-align:right}
+.best{margin-top:40px}
+.best .months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:12px}
+.best .months div{height:38px;border-radius:6px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:#0c0a08;cursor:pointer;transition:transform .3s var(--ease);position:relative}
+.best .months div:hover{transform:translateY(-3px)}
+.best .months div.on::after{content:"";position:absolute;inset:-3px;border:1px solid var(--ink);border-radius:9px}
+.lists{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+.lists ul{list-style:none;padding:0;margin:12px 0 0;font-size:14px;color:var(--ink2)}
+.lists li{padding:8px 0;border-top:1px dashed var(--line)}
+.lists li::before{content:"—";color:var(--saffron);margin-right:10px}
+
+/* traffic */
+.slider{display:flex;align-items:center;gap:16px;margin:20px 0 30px;flex-wrap:wrap}
+.slider input[type=range]{flex:1;min-width:220px;accent-color:var(--saffron)}
+.slider .now{font-family:var(--serif);font-size:40px;min-width:120px;line-height:1}
+.gauges{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.gauge .cn{font-family:var(--serif);font-size:26px}
+.gauge .sp{font-family:var(--serif);font-size:52px;line-height:1;margin:6px 0 4px}.gauge .sp small{font-size:18px;color:var(--ink3)}
+.gauge .lvl{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.gauge .bar24{display:flex;gap:2px;height:36px;align-items:flex-end;margin:12px 0}
+.gauge .bar24 i{flex:1;background:var(--ink3);opacity:.5;border-radius:2px 2px 0 0;transition:all .3s}
+.gauge .bar24 i.on{background:var(--saffron);opacity:1}
+.gauge p{font-size:12.5px;color:var(--ink3);margin:8px 0 12px}
+.gauge table{width:100%;border-collapse:collapse;font-size:12.5px}
+.gauge td{padding:7px 0;border-top:1px dashed var(--line);color:var(--ink2)}
+.gauge td:last-child{text-align:right;font-family:var(--mono);color:var(--ink)}
+
+/* budget */
+.bud{display:grid;grid-template-columns:1fr 1.2fr;gap:50px}
+.choice{margin-bottom:22px}
+.choice .eyebrow{margin-bottom:8px}
+.choice .seg button{padding:7px 14px}
+.chk{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;color:var(--ink2);cursor:pointer;border-top:1px dashed var(--line)}
+.chk input{accent-color:var(--saffron);width:16px;height:16px}
+.chk span:last-child{margin-left:auto;font-family:var(--mono);font-size:12px}
+table.tot{width:100%;border-collapse:collapse;font-size:14px}
+table.tot td{padding:11px 0;border-top:1px dashed var(--line);color:var(--ink2)}
+table.tot td:last-child{text-align:right;font-family:var(--mono);color:var(--ink)}
+table.tot tr.sum td{border-top:1px solid var(--ink);font-family:var(--serif);font-size:30px;color:var(--ink);padding-top:16px}
+table.tot tr.sum td:last-child{font-family:var(--serif)}
+.pp{font-size:13px;color:var(--ink3);margin-top:10px}
+
+/* checklist */
+.todo{columns:2;column-gap:40px}
+.todo label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line);font-size:14px;color:var(--ink2);break-inside:avoid;cursor:pointer}
+.todo input{accent-color:var(--saffron);margin-top:3px}
+.todo label.done{color:var(--ink3);text-decoration:line-through}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:99px;border:1px solid var(--line);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);transition:all .3s}
+.btn:hover{background:var(--ink);color:#0c0a08}
+footer{width:var(--w);margin:0 auto;padding:40px 0 60px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3)}
+footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer li{padding:3px 0;break-inside:avoid}footer a{color:var(--ink2);text-decoration:none}
+.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);z-index:60;padding:10px 16px;border-radius:99px;background:rgba(20,17,13,.95);border:1px solid var(--line);font-size:12px;opacity:0;transition:all .4s var(--ease);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .c2,.c3,.wx,.gauges,.bud,.lists{grid-template-columns:1fr}
+  .leg,.day{grid-template-columns:1fr}.day .dl{position:static}.day .dl .dn{font-size:44px}
+  .todo,footer ol{columns:1}
+  .bar .in{gap:10px 14px}.bar nav{gap:12px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .opt{grid-template-columns:34px 1fr}.opt .fare{grid-column:2;text-align:left;margin-top:6px}
+  .it{grid-template-columns:52px 24px 1fr}
+  .route text.city{font-size:16px}
+}
+@media print{
+  .bar,.mapwrap,.bg-glow,.toast,.btn,.slider,.route,.live{display:none!important}
+  body{background:#fff;color:#111}section{padding:24px 0}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<div class="bar">
+  <div class="in">
+    <div class="brand">A<b>·</b>D<b>·</b>V <span style="color:var(--ink3);font-size:13px;font-family:var(--sans);margin-left:8px">planned</span></div>
+    <div class="ctl"><label>Depart</label><input type="date" id="start"></div>
+    <div class="ctl"><label>Travellers</label><span class="stepper"><button id="tm">−</button><b id="tv">2</b><button id="tp">+</button></span></div>
+    <div class="ctl"><label>Tickets</label><span class="seg" id="cit"><button class="on" data-v="0">Indian</button><button data-v="1">Foreign</button></span></div>
+    <div class="ctl"><label>Show in</label><span class="seg" id="cur"><button class="on" data-v="INR">₹</button><button data-v="USD">$</button></span></div>
+    <nav><a href="#map">Map</a><a href="#legs">Between cities</a><a href="#days">Day by day</a><a href="#weather">Weather</a><a href="#traffic">Traffic & rides</a><a href="#budget">Budget</a><a href="#book">Bookings</a></nav>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="eyebrow">A journey through</div>
+  <h1><span>Agra<i class="d" style="background:var(--saffron)"></i></span><span>Delhi<i class="d" style="background:var(--teal)"></i></span><span>Varanasi</span></h1>
+  <div class="sub" id="sub"></div>
+  <p class="lead" style="margin-top:22px">Not a poster this time. A working plan: every hop measured from real coordinates, every train and flight with its timetable and fare, ride estimates that know what hour it is, and the weather you should actually expect. Change the departure date up top and the whole page re-plans itself.</p>
+  <div class="route" id="route"></div>
+  <div class="live" id="live"></div>
+</section>
+
+<section id="map">
+  <div class="eyebrow">01 · The map</div>
+  <h2>Four cities, <em>3,900 km</em>, one loop.</h2>
+  <p class="lead">Flights drawn as great circles, trains along the line. Click any marker. Hover an itinerary item further down and the map follows.</p>
+  <div class="mapwrap" style="margin-top:34px"><div id="leafmap"></div><div class="maplegend"><span class="pill"><i style="--c:var(--saffron)"></i>Flight</span><span class="pill"><i style="--c:var(--teal)"></i>Train</span><span class="pill"><i style="--c:var(--gold)"></i>Sight</span><span class="pill"><i style="--c:#fff"></i>Where you sleep</span></div></div>
+  <div class="mapstats" id="mapstats"></div>
+</section>
+
+<section id="legs">
+  <div class="eyebrow">02 · Between cities</div>
+  <h2>Trains, flights, <em>and the choice</em> between them.</h2>
+  <p class="lead">Pick the option you'd take on each leg. Fares are current published ranges; the budget below follows your choices. Times shown are the scheduled ones.</p>
+  <div id="legList" style="margin-top:34px"></div>
+</section>
+
+<section id="days">
+  <div class="eyebrow">03 · Day by day</div>
+  <h2>Ten days, <em>hour by hour.</em></h2>
+  <p class="lead">Each ride shows road distance from coordinates, time at that hour's typical traffic, and an estimated Uber or cab fare. Each sight shows the entry fee for your ticket type and the temperature to expect when you're there. Closed-day clashes are flagged from your departure date.</p>
+  <div id="dayList" style="margin-top:20px"></div>
+</section>
+
+<section id="weather">
+  <div class="eyebrow">04 · Weather & best time</div>
+  <h2>What the sky <em>will do</em> to your plan.</h2>
+  <p class="lead">Monthly normals computed from three years of daily station data. Click a month on the chart or the strip to re-plan the trip for it.</p>
+  <div class="chart" id="chart" style="margin-top:30px"></div>
+  <div class="wx" id="wx"></div>
+  <div class="best"><div class="eyebrow">Best time to go</div><div class="months" id="months"></div><p class="lead" id="verdict" style="margin-top:14px;font-size:15px"></p></div>
+  <div class="lists"><div><div class="eyebrow">In your month</div><ul id="fest"></ul></div><div><div class="eyebrow">Pack</div><ul id="pack"></ul></div></div>
+</section>
+
+<section id="traffic">
+  <div class="eyebrow">05 · Traffic & rides</div>
+  <h2>How slow the city is <em>right now.</em></h2>
+  <p class="lead">Drag the clock. Speeds are typical weekday profiles; fares use each city's UberGo-class rates with surge rising as speeds fall.</p>
+  <div class="slider"><span class="now" id="clock">08:00</span><input type="range" id="hour" min="0" max="23" step="1" value="8"><span class="pill" id="nowpill"></span></div>
+  <div class="gauges" id="gauges"></div>
+</section>
+
+<section id="budget">
+  <div class="eyebrow">06 · Budget</div>
+  <h2>What it <em>actually</em> costs.</h2>
+  <div class="bud" style="margin-top:30px">
+    <div>
+      <div class="choice"><div class="eyebrow">Where you sleep · 9 nights</div><span class="seg" id="hotel"></span></div>
+      <div class="choice"><div class="eyebrow">How you eat · 10 days</div><span class="seg" id="food"></span></div>
+      <div class="choice"><div class="eyebrow">Extras, per person</div><div id="extras"></div></div>
+      <p class="lead" style="font-size:13px;color:var(--ink3)">Flights and trains use the middle of the current fare range for the options you picked above. Rides sum every itinerary hop at its scheduled hour. Entry fees follow the ticket type in the top bar. A 10% buffer is added because India.</p>
+    </div>
+    <div><table class="tot" id="tot"></table><div class="pp" id="pp"></div></div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="eyebrow">07 · Bookings</div>
+  <h2>Do these <em>in this order.</em></h2>
+  <div class="todo" id="todo" style="margin-top:26px"></div>
+  <div style="margin-top:30px;display:flex;gap:12px;flex-wrap:wrap"><button class="btn" onclick="window.print()">Print this plan</button><button class="btn" id="share">Copy link with my settings</button></div>
+</section>
+</main>
+
+<footer>
+  <div class="eyebrow">Sources checked Sept 2026</div>
+  <ol id="src"></ol>
+  <div>Fares and timetables change. Ride fares are estimates from published rate cards and traffic profiles, not live quotes. Verify on IRCTC, the airline, and the ride app before you book.</div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+(() => {
+const T=window.TRIP, $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], MONL=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DOW=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const ICON={flight:'M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z',train:'M6 3h12a2 2 0 012 2v10a3 3 0 01-3 3H7a3 3 0 01-3-3V5a2 2 0 012-2zM4 10h16M8 21l1-3M16 21l-1-3M8 14h.01M16 14h.01',car:'M5 17h14M6 17l1.5-5h9L18 17M4 17v2h3v-2M17 17v2h3v-2M8 12l1-3h6l1 3',walk:'M13 4a1 1 0 100-2 1 1 0 000 2zM10 22l2-7-2-2 1-5 3 1 2 3h2M9 14l-2 4M14 15l2 3 1 4',sight:'M12 3l2 5h5l-4 3.5 1.5 5.5-4.5-3-4.5 3L9 11.5 5 8h5z',meal:'M6 3v8a2 2 0 002 2v8M8 3v6M10 3v6M17 3c-2 0-3 3-3 6v3h3v9',free:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 8v4l3 2',metro:'M12 3C8 3 5 4 5 7v9a3 3 0 003 3h8a3 3 0 003-3V7c0-3-3-4-7-4zM5 11h14M8 21l-1 1M16 21l1 1M9 15h.01M15 15h.01'};
+const svg=k=>`<svg viewBox="0 0 24 24"><path d="${ICON[k]||ICON.free}"/></svg>`;
+
+/* ───── state ───── */
+const S={start:new Date(2026,9,17), n:T.travellers, cit:0, cur:"INR", hour:8, hotel:1, food:1, extras:new Set([0,1]), legs:{}, cls:{}, done:new Set()};
+try{ const u=new URLSearchParams(location.search); if(u.get('d')) S.start=new Date(u.get('d')+'T00:00'); if(u.get('n')) S.n=+u.get('n'); if(u.get('c')) S.cit=+u.get('c'); if(u.get('cur')) S.cur=u.get('cur'); if(u.get('h')) S.hotel=+u.get('h'); if(u.get('f')) S.food=+u.get('f'); if(u.get('l')) u.get('l').split(',').forEach(p=>{const [k,v]=p.split(':'); S.legs[k]=+v;}); const d=localStorage.getItem('adv.done'); if(d) S.done=new Set(JSON.parse(d)); }catch(e){}
+T.legs.forEach(l=>{ if(S.legs[l.id]==null) S.legs[l.id]=0; S.cls[l.id]=0; });
+const month=()=>S.start.getMonth();
+const dayDate=n=>{ const d=new Date(S.start); d.setDate(d.getDate()+n); return d; };
+
+/* ───── geo ───── */
+const R=6371, rad=x=>x*Math.PI/180;
+function hav(a,b){ const dLat=rad(b.lat-a.lat), dLng=rad(b.lng-a.lng); const h=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+function gc(a,b,n=48){ const φ1=rad(a.lat),λ1=rad(a.lng),φ2=rad(b.lat),λ2=rad(b.lng); const d=2*Math.asin(Math.sqrt(Math.sin((φ2-φ1)/2)**2+Math.cos(φ1)*Math.cos(φ2)*Math.sin((λ2-λ1)/2)**2)); const pts=[]; for(let i=0;i<=n;i++){ const f=i/n, A=Math.sin((1-f)*d)/Math.sin(d), B=Math.sin(f*d)/Math.sin(d); const x=A*Math.cos(φ1)*Math.cos(λ1)+B*Math.cos(φ2)*Math.cos(λ2), y=A*Math.cos(φ1)*Math.sin(λ1)+B*Math.cos(φ2)*Math.sin(λ2), z=A*Math.sin(φ1)+B*Math.sin(φ2); pts.push([Math.atan2(z,Math.sqrt(x*x+y*y))/rad(1), Math.atan2(y,x)/rad(1)]); } return pts; }
+const SIGHT=Object.fromEntries(T.sights.map(s=>[s.id,s]));
+function pt(key,cityKey){ if(key==='home') return T.home; if(key==='homeAirport') return T.home.airport; if(SIGHT[key]) return SIGHT[key]; const c=T.cities[cityKey]; return c&&c[key]?c[key]:null; }
+function cityOf(key,ctx){ return SIGHT[key]?SIGHT[key].city:ctx; }
+
+/* ───── models ───── */
+function rideModel(cityKey){ return cityKey==='blr'?{...T.homeRide,speeds:T.homeRide.speeds}:{...T.cities[cityKey].ride,speeds:T.cities[cityKey].traffic.speeds}; }
+function ride(cityKey,km,hour,fixed){ const m=rideModel(cityKey); const sp=m.speeds[clamp(Math.round(hour),0,23)%24]; const mx=Math.max(...m.speeds), mn=Math.min(...m.speeds); const cong=(mx-sp)/(mx-mn); const mins=Math.round(km/sp*60+4); const surge=1+(m.peak-1)*cong; const fare=fixed?fixed:[Math.round(Math.max(m.min,(m.base+m.perKm*km+m.perMin*mins)*surge)/10)*10, null]; return {km,mins,sp,cong,fare,surge}; }
+function tempAt(cityKey,hour){ const c=cityKey==='blr'?T.homeClimate:T.cities[cityKey].climate; const m=month(); const lo=c.lo[m],hi=c.hi[m]; const h=((hour%24)+24)%24; let f; if(h>=5&&h<=15) f=.5-.5*Math.cos(Math.PI*(h-5)/10); else { const x=h>15?h-15:h+9; f=.5+.5*Math.cos(Math.PI*x/14); } return Math.round(lo+(hi-lo)*f); }
+function sun(lat,lng,date){ const J=Math.floor((date-new Date(date.getFullYear(),0,0))/864e5); const decl=23.44*Math.PI/180*Math.sin(2*Math.PI*(284+J)/365); const B=2*Math.PI*(J-81)/364; const eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B); const ha=Math.acos((Math.sin(-0.833*Math.PI/180)-Math.sin(rad(lat))*Math.sin(decl))/(Math.cos(rad(lat))*Math.cos(decl)))*180/Math.PI/15; const noon=12-lng/15-eot/60+5.5; return {rise:noon-ha,set:noon+ha}; }
+const hm=h=>{ const H=Math.floor(h), M=Math.round((h-H)*60); return `${String(H).padStart(2,'0')}:${String(M).padStart(2,'0')}`; };
+const money=(v,unit=true)=>{ if(v==null) return ''; if(S.cur==='USD') return (unit?'$':'')+Math.round(v/T.currency.usd).toLocaleString('en-IN'); return (unit?'₹':'')+Math.round(v).toLocaleString('en-IN'); };
+const range=(a,b)=>b?`${money(a)}–${money(b,false)}`:money(a);
+const mid=f=>f[1]?(f[0]+f[1])/2:f[0];
+const legFare=l=>{ const o=l.options[S.legs[l.id]]; return o.classes?o.fare[S.cls[l.id]]:mid(o.fare); };
+const dur=m=>m>=60?`${Math.floor(m/60)}h ${m%60?m%60+'m':''}`.trim():`${m}m`;
+const AQL=['','Good','Moderate','Unhealthy for some','Poor','Very poor'];
+
+/* ───── hero: route ribbon ───── */
+function renderRoute(){
+  const seq=[T.home,T.cities.agra,T.cities.delhi,T.cities.varanasi,T.home]; const W=1000,H=150; const xs=seq.map((_,i)=>60+i*(W-120)/(seq.length-1));
+  let path='',nodes='',labels='';
+  seq.forEach((c,i)=>{ const x=xs[i],y=90; if(i){ const px=xs[i-1]; const leg=T.legs[i-1]; const o=leg.options[S.legs[leg.id]]; const km=Math.round(hav(seq[i-1],c)*(o.mode==='flight'?1:1.25)); const mx=(px+x)/2; path+=`<path class="dash" d="M${px} ${y} Q${mx} ${o.mode==='flight'?y-70:y-14} ${x} ${y}" style="stroke:${o.mode==='flight'?'var(--saffron)':'var(--teal)'}"/>`; labels+=`<text class="k" x="${mx}" y="${o.mode==='flight'?y-52:y-22}" text-anchor="middle">${km.toLocaleString('en-IN')} km · ${dur(o.mins)}</text>`; }
+    nodes+=`<g class="node"><circle cx="${x}" cy="${y}" r="5" fill="${i===0||i===4?'#fff':'var(--saffron)'}"/><text class="city" x="${x}" y="${y+34}" text-anchor="middle">${c.name}</text><text x="${x}" y="${y+52}" text-anchor="middle">${i===0?'Day 0':i===4?'Day 9':T.cities[Object.keys(T.cities)[i-1]].days}</text></g>`; });
+  $('#route').innerHTML=`<svg viewBox="0 0 ${W} ${H}">${path}${labels}${nodes}</svg>`;
+  $('#sub').textContent=`${T.subtitle} · departing ${DOW[S.start.getDay()]} ${S.start.getDate()} ${MONL[month()]} ${S.start.getFullYear()}`;
+}
+
+/* ───── live weather ───── */
+const WMO={0:'clear',1:'mostly clear',2:'partly cloudy',3:'overcast',45:'fog',48:'fog',51:'drizzle',53:'drizzle',55:'drizzle',61:'light rain',63:'rain',65:'heavy rain',80:'showers',81:'showers',82:'heavy showers',95:'thunderstorm',96:'thunderstorm',99:'thunderstorm'};
+async function live(){
+  const el=$('#live'); el.innerHTML=Object.values(T.cities).map(c=>`<div style="--c:${c.accent}"><span class="dot"></span><span><b>…</b><br><small>${c.name.toUpperCase()} · loading live</small></span></div>`).join('');
+  await Promise.all(Object.values(T.cities).map(async (c,i)=>{ try{ const [w,a]=await Promise.all([fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lng}&current=temperature_2m,weather_code,relative_humidity_2m&timezone=Asia%2FKolkata`).then(r=>r.json()),fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${c.lat}&longitude=${c.lng}&current=us_aqi,pm2_5&timezone=Asia%2FKolkata`).then(r=>r.json())]); const aqi=a.current.us_aqi; const cls=aqi<=50?'ok':aqi<=100?'':aqi<=150?'warn':'bad'; el.children[i].innerHTML=`<span class="dot"></span><span><b>${Math.round(w.current.temperature_2m)}°</b> ${WMO[w.current.weather_code]||'—'} · humidity ${w.current.relative_humidity_2m}%<br><small>${c.name.toUpperCase()} · NOW · AQI <span class="${cls}">${aqi} ${aqi<=50?'good':aqi<=100?'moderate':aqi<=150?'unhealthy for sensitive':aqi<=200?'unhealthy':'very unhealthy'}</span> · PM2.5 ${a.current.pm2_5}</small></span>`; }catch(e){ el.children[i].innerHTML=`<span class="dot"></span><span><b>—</b><br><small>${c.name.toUpperCase()} · live weather unavailable</small></span>`; } }));
+}
+
+/* ───── map ───── */
+let map, layerSights={}, layerLegs=[];
+function renderMap(){
+  if(!window.L){ $('#leafmap').innerHTML='<p style="padding:20px;color:var(--ink3)">Map library failed to load.</p>'; return; }
+  if(!map){ map=L.map('leafmap',{scrollWheelZoom:false,zoomControl:true,attributionControl:true}); L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',maxZoom:19}).addTo(map);
+    const all=[T.home,...Object.values(T.cities)]; map.fitBounds(all.map(c=>[c.lat,c.lng]),{padding:[40,40]});
+    for(const c of Object.values(T.cities)){ L.circleMarker([c.stay.lat,c.stay.lng],{radius:6,color:'#fff',weight:1.5,fillColor:'#fff',fillOpacity:.9}).addTo(map).bindPopup(`<b>${c.stay.name}</b>Base in ${c.name} · ${c.days}<span class="k">${c.stay.lat.toFixed(4)}, ${c.stay.lng.toFixed(4)}</span>`); L.circleMarker([c.hub.lat,c.hub.lng],{radius:4,color:c.accent,weight:1.5,fillColor:'#000',fillOpacity:1}).addTo(map).bindPopup(`<b>${c.hub.name}</b>${Math.round(hav(c.hub,c.stay)*1.3)} km to where you sleep`); if(c.rail) L.circleMarker([c.rail.lat,c.rail.lng],{radius:4,color:'var(--teal)',weight:1.5,fillColor:'#000',fillOpacity:1}).addTo(map).bindPopup(`<b>${c.rail.name}</b>${Math.round(hav(c.rail,c.stay)*1.3)} km to where you sleep`); }
+    L.circleMarker([T.home.airport.lat,T.home.airport.lng],{radius:5,color:'#fff',weight:1.5,fillColor:'#000',fillOpacity:1}).addTo(map).bindPopup(`<b>${T.home.airport.name}</b>Home airport`);
+    for(const s of T.sights){ const c=T.cities[s.city]; const m=L.circleMarker([s.lat,s.lng],{radius:5,color:c.accent,weight:1.5,fillColor:c.accent,fillOpacity:.75}).addTo(map); m.bindPopup(()=>`<b>${s.name}</b>${s.blurb}<span class="k">Entry ${s.fee[S.cit]?money(s.fee[S.cit]):'free'} · ${s.hours} · closed: ${s.closed}<br>${Math.round(hav(c.stay,s)*1.3)} km from your base · ~${dur(s.dur)} visit</span>`); layerSights[s.id]=m; }
+  }
+  layerLegs.forEach(l=>map.removeLayer(l)); layerLegs=[];
+  for(const leg of T.legs){ const o=leg.options[S.legs[leg.id]]; const a=leg.from==='blr'?T.home.airport:T.cities[leg.from][o.fromPt]||T.cities[leg.from], b=leg.to==='blr'?T.home.airport:T.cities[leg.to][o.toPt]||T.cities[leg.to]; const pts=o.mode==='flight'?gc(a,b):[[a.lat,a.lng],[b.lat,b.lng]]; const pl=L.polyline(pts,{color:o.mode==='flight'?'#f28c28':'#3aa7b8',weight:2,opacity:.9,dashArray:o.mode==='flight'?null:'6 6'}).addTo(map); pl.bindPopup(`<b>${o.name}</b>${Math.round(hav(a,b)*(o.mode==='flight'?1:1.25)).toLocaleString('en-IN')} km · ${dur(o.mins)} · ${o.dep}→${o.arr}<span class="k">${range(...o.fare)} per person</span>`); layerLegs.push(pl); }
+  const km=T.legs.reduce((s,leg)=>{ const o=leg.options[S.legs[leg.id]]; const a=leg.from==='blr'?T.home:T.cities[leg.from], b=leg.to==='blr'?T.home:T.cities[leg.to]; return s+hav(a,b)*(o.mode==='flight'?1:1.25); },0);
+  const cityKm=T.days.reduce((s,d)=>s+d.items.filter(i=>i.kind==='ride').reduce((a,i)=>a+hop(i,d).km,0),0);
+  const mins=T.legs.reduce((s,l)=>s+l.options[S.legs[l.id]].mins,0);
+  $('#mapstats').innerHTML=`<div><b>${Math.round(km).toLocaleString('en-IN')}</b><small>km between cities</small></div><div><b>${Math.round(cityKm)}</b><small>km of rides inside cities</small></div><div><b>${dur(mins)}</b><small>in the air and on rails</small></div><div><b>${T.sights.length}</b><small>sights, ${T.sights.filter(s=>!s.fee[0]).length} of them free</small></div>`;
+}
+function focusSight(id){ const m=layerSights[id]; if(!m||!map) return; map.flyTo(m.getLatLng(),13,{duration:1.2}); setTimeout(()=>m.openPopup(),1200); $('#leafmap').scrollIntoView({behavior:'smooth',block:'center'}); }
+
+/* ───── legs ───── */
+function renderLegs(){
+  $('#legList').innerHTML=T.legs.map(leg=>{ const a=leg.from==='blr'?T.home:T.cities[leg.from], b=leg.to==='blr'?T.home:T.cities[leg.to]; const d=dayDate(leg.day); return `<div class="leg"><div class="who">${a.name} → ${b.name}<small>Day ${leg.day} · ${DOW[d.getDay()].slice(0,3)} ${d.getDate()} ${MON[d.getMonth()]}</small><span class="km">${Math.round(hav(a,b)).toLocaleString('en-IN')} km straight line</span></div><div>${leg.options.map((o,i)=>{ const on=S.legs[leg.id]===i; const fri=o.note.includes('except Friday')&&d.getDay()===5; return `<div class="opt ${on?'on':'off'}" data-leg="${leg.id}" data-i="${i}"><div class="ic">${svg(o.mode)}</div><div class="nm">${o.name}</div><div class="fare">${o.classes?money(o.fare[on?S.cls[leg.id]:0]):range(...o.fare)}<small>per person</small></div><div class="meta"><span class="mono">${o.dep} → ${o.arr}</span> · ${dur(o.mins)} · ${Math.round(hav(a,b)*(o.mode==='flight'?1:1.25)).toLocaleString('en-IN')} km${fri?' · <span class="bad">does not run on Fridays — your Day '+leg.day+' is a Friday</span>':''}</div>${o.classes?`<div class="cls">${o.classes.map((c,j)=>`<button class="${S.cls[leg.id]===j?'on':''}" data-cls="${j}">${c} · ${money(o.fare[j])}</button>`).join('')}</div>`:''}<div class="note">${o.note}</div></div>`; }).join('')}</div></div>`; }).join('');
+  $$('#legList .opt').forEach(el=>{ el.addEventListener('click',e=>{ const b=e.target.closest('[data-cls]'); if(b){ S.cls[el.dataset.leg]=+b.dataset.cls; } S.legs[el.dataset.leg]=+el.dataset.i; renderAll(['legs','route','map','budget']); }); });
+}
+
+/* ───── itinerary ───── */
+function hop(it,day){ const ctx=it.cityRef||day.city; const a=pt(it.from,ctx)||T.cities[ctx]||T.home, b=pt(it.to,ctx)||T.cities[ctx]||T.home; const km=Math.round(hav(a,b)*1.3*10)/10; if(it.metro) return {km,mins:Math.round(km/28*60+10),fare:[Math.round(20+km*2),null],metro:true}; return ride(ctx,km,it.t,it.fixed); }
+function renderDays(){
+  const sightsSeen=new Set();
+  $('#dayList').innerHTML=T.days.map(day=>{ const d=dayDate(day.n); const c=T.cities[day.city]; let rideCost=0,fees=0,km=0; const rows=day.items.map(it=>{ const t=hm(it.t); const temp=tempAt(it.cityRef||day.city,it.t); let ic=it.kind,lb=it.label||'',meta=[],x='',alert='',cls='';
+      if(it.kind==='sight'){ const s=SIGHT[it.ref]; lb=`<a href="#" data-sight="${s.id}">${it.label||s.name}</a>`; const fee=s.fee[S.cit]; const first=!sightsSeen.has(s.id); sightsSeen.add(s.id); if(first&&!it.short) fees+=fee; meta=[`<span>entry <b>${fee?money(fee):'free'}</b></span>`,`<span>~${dur(it.short?60:s.dur)}</span>`,`<span>${Math.round(hav(c.stay,s)*1.3)} km from base</span>`,`<span><b>${temp}°C</b> at ${t}</span>`]; x=s.blurb+(s.feeNote?` · ${s.feeNote}`:''); cls=`sight" style="--c:${c.accent}`; const dow=DOW[d.getDay()]; if(s.closed.toLowerCase().includes(dow.toLowerCase())) alert=`<div class="alert">${s.name} is closed on ${dow}s and Day ${day.n} falls on a ${dow}. Shift the departure date, or swap this with another day.</div>`; }
+      else if(it.kind==='ride'){ const h=hop(it,day); km+=h.km; rideCost+=h.fare[0]; ic=it.metro?'metro':'car'; meta=[`<span><b>${h.km} km</b> by road</span>`,`<span><b>${dur(h.mins)}</b>${h.metro?' door to door':h.cong>.6?' <i class="warn">heavy traffic</i>':h.cong>.35?' moderate traffic':' light traffic'}</span>`,`<span>${h.metro?'metro':it.fixed?'fixed cab':'Uber est.'} <b>${range(...h.fare)}</b></span>`,`<span>${temp}°C</span>`]; if(!h.metro&&!it.fixed) x=`Estimated at ${t}: ${h.sp} km/h typical speed, surge ×${h.surge.toFixed(2)}. Per-km and per-minute rates for a UberGo-class car in ${ctxName(it,day)}.`; }
+      else if(it.kind==='flight'||it.kind==='train'){ const leg=T.legs.find(l=>l.id===it.ref); const o=leg.options[S.legs[leg.id]]; ic=o.mode; lb=o.name; meta=[`<span class="mono">${o.dep} → ${o.arr}</span>`,`<span>${dur(o.mins)}</span>`,`<span><b>${money(legFare(leg))}</b> pp</span>`]; x=o.note; }
+      else if(it.kind==='walk'){ meta=[`<span>${temp}°C</span>`]; }
+      else { meta=[`<span>${temp}°C at ${t}</span>`]; }
+      return `<div class="it ${cls}" data-kind="${it.kind}"><div class="t">${t}</div><div class="ic">${svg(ic)}</div><div class="lb">${lb}</div><div class="m">${meta.join('')}</div>${x?`<div class="x">${x}</div>`:''}${alert}</div>`; }).join('');
+    const lo=T.cities[day.city].climate.lo[month()], hi=T.cities[day.city].climate.hi[month()]; const sr=sun(c.lat,c.lng,d);
+    const spark=(()=>{ const pts=[]; for(let h=0;h<=23;h++){ pts.push(`${h/23*170},${44-((tempAt(day.city,h)-lo)/(hi-lo||1))*36-4}`);} return `<svg viewBox="0 0 170 44"><polyline points="${pts.join(' ')}" fill="none" stroke="${c.accent}" stroke-width="1.5"/>${day.items.filter(i=>i.kind==='sight').map(i=>`<circle cx="${i.t/23*170}" cy="${44-((tempAt(day.city,i.t)-lo)/(hi-lo||1))*36-4}" r="2.5" fill="#fff"/>`).join('')}</svg>`; })();
+    return `<div class="day"><div class="dl"><div class="dn"><small>Day</small>${day.n}</div><div class="dt">${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]} · ${c.name}</div><div class="dw">${lo}°–${hi}°C · sunrise ${hm(sr.rise)} · sunset ${hm(sr.set)}</div><div class="temp">${spark}<small>hourly temperature, dots = your sights</small></div></div><div><h3>${day.title}</h3>${rows}<div class="daytot"><span>rides <b>${km.toFixed(0)} km</b></span><span>ride spend <b>≈ ${money(rideCost)}</b></span><span>entry fees <b>${money(fees)}</b> pp</span></div></div></div>`; }).join('');
+  $$('#dayList .it').forEach(el=>{ el.addEventListener('click',e=>{ const a=e.target.closest('[data-sight]'); if(a){ e.preventDefault(); focusSight(a.dataset.sight); return; } el.classList.toggle('open'); }); el.addEventListener('mouseenter',()=>{ const a=$('[data-sight]',el); if(a&&map&&layerSights[a.dataset.sight]) layerSights[a.dataset.sight].setStyle({radius:9}); }); el.addEventListener('mouseleave',()=>{ const a=$('[data-sight]',el); if(a&&map&&layerSights[a.dataset.sight]) layerSights[a.dataset.sight].setStyle({radius:5}); }); });
+}
+function ctxName(it,day){ return it.cityRef==='blr'?T.home.name:T.cities[day.city].name; }
+
+/* ───── weather ───── */
+function renderWeather(){
+  const m=month(); const W=1000,H=300,L=40,Rr=20,Tt=20,B=40; const x=i=>L+i*(W-L-Rr)/11, y=v=>Tt+(45-v)/(45-5)*(H-Tt-B);
+  const cities=Object.values(T.cities);
+  let g=`<rect class="sel" x="${x(m)-(W-L-Rr)/22}" y="${Tt}" width="${(W-L-Rr)/11}" height="${H-Tt-B}" rx="8"/>`;
+  for(let v=10;v<=40;v+=10) g+=`<line class="ax" x1="${L}" x2="${W-Rr}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-8}" y="${y(v)+3}" text-anchor="end">${v}°</text>`;
+  for(const c of cities){ g+=`<path d="M${c.climate.hi.map((v,i)=>`${x(i)},${y(v)}`).join('L')}" stroke="${c.accent}"/><path class="lo" d="M${c.climate.lo.map((v,i)=>`${x(i)},${y(v)}`).join('L')}" stroke="${c.accent}"/>`; }
+  for(let i=0;i<12;i++) g+=`<g class="mo" data-m="${i}"><rect x="${x(i)-(W-L-Rr)/22}" y="${Tt}" width="${(W-L-Rr)/11}" height="${H-Tt-B}" fill="transparent"/><text x="${x(i)}" y="${H-14}" text-anchor="middle" ${i===m?'fill="#f0e6d6"':''}>${MON[i]}</text></g>`;
+  g+=cities.map((c,i)=>`<g transform="translate(${L+i*130},${H+4})"><line x1="0" x2="18" y1="0" y2="0" stroke="${c.accent}" stroke-width="1.6"/><text x="24" y="3">${c.name} high · dashed low</text></g>`).join('');
+  $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H+16}">${g}</svg>`;
+  $$('#chart .mo').forEach(el=>el.addEventListener('click',()=>setMonth(+el.dataset.m)));
+  $('#wx').innerHTML=cities.map(c=>{ const cl=c.climate; const d=dayDate({agra:1,delhi:3,varanasi:7}[Object.keys(T.cities).find(k=>T.cities[k]===c)]); const sr=sun(c.lat,c.lng,d); const a=c.aqi[m]; return `<div><div class="cn" style="color:${c.accent}">${c.name}</div><div class="big">${cl.hi[m]}°<small> / ${cl.lo[m]}°</small></div><ul><li>Rain in ${MONL[m]}<b>${cl.rain[m]} mm${cl.rain[m]>150?' · monsoon':cl.rain[m]<15?' · dry':''}</b></li><li>Air quality, typical<b class="${a>=4?'bad':a===3?'warn':'ok'}">${AQL[a]}</b></li><li>Sunrise on your day<b>${hm(sr.rise)}</b></li><li>Sunset<b>${hm(sr.set)}</b></li><li>Feels like<b>${cl.hi[m]>=38?'brutal afternoons':cl.hi[m]>=33?'hot, plan mornings':cl.lo[m]<=10?'cold mornings, fine days':'ideal'}</b></li></ul></div>`; }).join('');
+  const score=i=>{ const hi=Math.max(...cities.map(c=>c.climate.hi[i])), rain=Math.max(...cities.map(c=>c.climate.rain[i])), aq=Math.max(...cities.map(c=>c.aqi[i])); let s=5; if(hi>=38) s-=3; else if(hi>=34) s-=1.5; if(rain>150) s-=2; else if(rain>80) s-=1; if(aq>=5) s-=1.5; else if(aq>=4) s-=.5; return clamp(s,0,5); };
+  const col=s=>s>=4.5?'#8fd3a8':s>=3.5?'#cfe08a':s>=2.5?'#e0b45a':s>=1.5?'#f28c28':'#f28c8c';
+  $('#months').innerHTML=[...Array(12)].map((_,i)=>`<div class="${i===m?'on':''}" data-m="${i}" style="background:${col(score(i))}" title="${MONL[i]}">${MON[i]}</div>`).join('');
+  $$('#months div').forEach(el=>el.addEventListener('click',()=>setMonth(+el.dataset.m)));
+  const s=score(m); $('#verdict').innerHTML=`<b style="color:${col(s)}">${MONL[m]}: ${s>=4.5?'the best time':s>=3.5?'very good':s>=2.5?'workable with care':s>=1.5?'hard going':'avoid if you can'}.</b> ${s>=4?'Cool mornings for the Taj and the boat, warm days, dry skies.':m>=4&&m<=5?'Forty-degree afternoons: do every monument before 10:00 and sleep through the middle of the day.':m>=6&&m<=8?'Monsoon. Varanasi ghats can flood and boats stop; Agra empties out, which has its charm.':m===10||m===11||m===0?'Delhi air is at its worst; keep masks for the city days and enjoy the crisp north Indian winter everywhere else.':'Shoulder season: check each city above.'} October to March is the window; November has the lamps, February the festival.`;
+  $('#fest').innerHTML=T.festivals.filter(f=>f.m===m+1).map(f=>`<li>${f.name}</li>`).join('')||'<li>No major festival clash. Quieter monuments.</li>';
+  const hi=Math.max(...cities.map(c=>c.climate.hi[m])), lo=Math.min(...cities.map(c=>c.climate.lo[m])), rain=Math.max(...cities.map(c=>c.climate.rain[m])), aq=Math.max(...cities.map(c=>c.aqi[m]));
+  $('#pack').innerHTML=[...T.packing.base,...(hi>=32?T.packing.hot:[]),...(lo<=12?T.packing.cold:[]),...(rain>60?T.packing.wet:[]),...(aq>=4?T.packing.smog:[])].map(p=>`<li>${p}</li>`).join('');
+}
+function setMonth(m){ const d=new Date(S.start); d.setMonth(m); S.start=d; $('#start').value=iso(d); renderAll(); }
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+/* ───── traffic ───── */
+const SAMPLE={agra:[['Agra Cantt → Taj Ganj','hub','stay'],['Taj Ganj → Agra Fort','stay','fort'],['Taj → Fatehpur Sikri','taj','sikri']],delhi:[['T3 → Connaught Place','hub','stay'],['CP → Nizamuddin station','stay','rail'],['CP → Qutub Minar','stay','qutub']],varanasi:[['Airport → Assi Ghat','hub','stay'],['Assi → Kashi Vishwanath','stay','kashi'],['Kashi → Sarnath','kashi','sarnath']]};
+function renderTraffic(){
+  const h=S.hour; $('#clock').textContent=hm(h); const now=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000); $('#nowpill').innerHTML=`<i></i>India time now ${hm(now.getHours()+now.getMinutes()/60)}`;
+  $('#gauges').innerHTML=Object.entries(T.cities).map(([k,c])=>{ const sp=c.traffic.speeds[h], mx=Math.max(...c.traffic.speeds), mn=Math.min(...c.traffic.speeds); const cong=(mx-sp)/(mx-mn); const lvl=cong>.7?['Gridlock','bad']:cong>.45?['Heavy','warn']:cong>.2?['Moving',''] :['Free flowing','ok']; return `<div class="gauge"><div class="cn" style="color:${c.accent}">${c.name}</div><div class="sp">${sp}<small> km/h</small></div><div class="lvl ${lvl[1]}">${lvl[0]} · surge ≈ ×${(1+(c.ride.peak-1)*cong).toFixed(2)}</div><div class="bar24">${c.traffic.speeds.map((s,i)=>`<i class="${i===h?'on':''}" style="height:${s/mx*100}%" title="${hm(i)} · ${s} km/h"></i>`).join('')}</div><p>${c.traffic.note}</p><table>${SAMPLE[k].map(([n,a,b])=>{ const r=ride(k,Math.round(hav(pt(a,k),pt(b,k))*1.3*10)/10,h,null); return `<tr><td>${n}<br><span style="font-size:11px;color:var(--ink3)">${r.km} km · ${dur(r.mins)}</span></td><td>${money(r.fare[0])}</td></tr>`; }).join('')}</table></div>`; }).join('');
+}
+
+/* ───── budget ───── */
+function renderBudget(){
+  const seg=(id,arr,key,fmt)=>{ $(id).innerHTML=arr.map((o,i)=>`<button class="${S[key]===i?'on':''}" data-i="${i}">${o.name} · ${fmt(o)}</button>`).join(''); $$('button',$(id)).forEach(b=>b.addEventListener('click',()=>{ S[key]=+b.dataset.i; renderBudget(); })); };
+  seg('#hotel',T.budget.hotels,'hotel',o=>money(o.night)+'/night'); seg('#food',T.budget.food,'food',o=>money(o.day)+'/day');
+  $('#extras').innerHTML=T.budget.extras.map((e,i)=>`<label class="chk"><input type="checkbox" data-i="${i}" ${S.extras.has(i)?'checked':''}><span>${e.name}</span><span>${money(e.pp)}</span></label>`).join('');
+  $$('#extras input').forEach(b=>b.addEventListener('change',()=>{ b.checked?S.extras.add(+b.dataset.i):S.extras.delete(+b.dataset.i); renderBudget(); }));
+  const n=S.n, rooms=Math.ceil(n/2);
+  const flights=T.legs.filter(l=>l.options[S.legs[l.id]].mode==='flight').reduce((s,l)=>s+legFare(l),0);
+  const trains=T.legs.filter(l=>l.options[S.legs[l.id]].mode!=='flight').reduce((s,l)=>s+legFare(l),0);
+  const rides=T.days.reduce((s,d)=>s+d.items.filter(i=>i.kind==='ride').reduce((a,i)=>a+hop(i,d).fare[0],0),0);
+  const seen=new Set(); const fees=T.days.reduce((s,d)=>s+d.items.filter(i=>i.kind==='sight'&&!i.short).reduce((a,i)=>{ if(seen.has(i.ref)) return a; seen.add(i.ref); return a+SIGHT[i.ref].fee[S.cit]; },0),0);
+  const hotels=T.budget.hotels[S.hotel].night*9*rooms, food=T.budget.food[S.food].day*10*n, extras=[...S.extras].reduce((s,i)=>s+T.budget.extras[i].pp,0)*n;
+  const rows=[['Flights',flights*n,`${T.legs.filter(l=>l.options[S.legs[l.id]].mode==='flight').length} legs × ${n}`],['Trains',trains*n,'mid fare, chosen class'],['Rides & cabs',rides,'shared, every hop'],['Entry fees',fees*n,`${S.cit?'foreign':'Indian'} tickets × ${n}`],['Hotels',hotels,`${rooms} room${rooms>1?'s':''} × 9 nights`],['Food',food,`${n} × 10 days`],['Extras',extras,'']];
+  const sub=rows.reduce((s,r)=>s+r[1],0), buffer=Math.round(sub*.1), total=sub+buffer;
+  $('#tot').innerHTML=rows.map(r=>`<tr><td>${r[0]}<br><span style="font-size:11px;color:var(--ink3)">${r[2]}</span></td><td>${money(r[1])}</td></tr>`).join('')+`<tr><td>Buffer 10%</td><td>${money(buffer)}</td></tr><tr class="sum"><td>Total</td><td>${money(total)}</td></tr>`;
+  $('#pp').innerHTML=`<b>${money(total/n)}</b> per person · ${S.cur==='INR'?'about $'+Math.round(total/n/T.currency.usd).toLocaleString():'about ₹'+Math.round(total/n).toLocaleString('en-IN')} · ${S.cur==='INR'?'':'at ₹'+T.currency.usd+' per dollar · '}${Math.round(total/n/10).toLocaleString('en-IN')} ${S.cur==='INR'?'₹':'$'} a day`;
+}
+
+/* ───── bookings ───── */
+function renderTodo(){
+  const d0=S.start; const lead=(n,days)=>{ const d=new Date(d0); d.setDate(d.getDate()+n-days); return `${d.getDate()} ${MON[d.getMonth()]}`; };
+  const items=[[`Flights: BLR→DEL, DEL→VNS, VNS→BLR`,`book by ${lead(0,45)} for the low fares`],[`Gatimaan Express both ways (IRCTC opens 60 days out)`,`opens ${lead(1,60)}`],[`Taj Mahal e-ticket with mausoleum add-on`,`asi.payumoney.com · book ${lead(2,7)}`],[`Hotel near Taj East Gate, 1 night`,`Day 1`],[`Hotel in Connaught Place / Nizamuddin, 5 nights`,`Days 0, 2–6`],[`Guesthouse at Assi Ghat, 3 nights`,`Days 6–8`],[`Sunrise and aarti boats in Varanasi`,`WhatsApp a boatman a day ahead`],[`Prebook Varanasi airport cab`,`fixed ₹580–700`],[`Download offline maps and metro card app`,`before Day 0`],[`Check Taj closure: Fridays, and Delhi monument Mondays`,`your dates: ${T.days.filter(d=>d.items.some(i=>i.kind==='sight'&&SIGHT[i.ref].closed.toLowerCase().includes(DOW[dayDate(d.n).getDay()].toLowerCase()))).map(d=>'Day '+d.n).join(', ')||'no clashes'}`]];
+  $('#todo').innerHTML=items.map((it,i)=>`<label class="${S.done.has(i)?'done':''}"><input type="checkbox" data-i="${i}" ${S.done.has(i)?'checked':''}><span>${it[0]}<br><span class="mono" style="color:var(--ink3)">${it[1]}</span></span></label>`).join('');
+  $$('#todo input').forEach(b=>b.addEventListener('change',()=>{ b.checked?S.done.add(+b.dataset.i):S.done.delete(+b.dataset.i); b.parentElement.classList.toggle('done',b.checked); try{ localStorage.setItem('adv.done',JSON.stringify([...S.done])); }catch(e){} }));
+}
+
+/* ───── wiring ───── */
+function renderAll(parts){ const all=!parts; if(all||parts.includes('route')) renderRoute(); if(all||parts.includes('legs')) renderLegs(); if(all||parts.includes('days')) renderDays(); if(all||parts.includes('weather')) renderWeather(); if(all||parts.includes('traffic')) renderTraffic(); if(all||parts.includes('budget')) renderBudget(); if(all||parts.includes('todo')) renderTodo(); if(all||parts.includes('map')) renderMap(); $('#tv').textContent=S.n; }
+$('#start').value=iso(S.start); $('#start').addEventListener('change',e=>{ if(!e.target.value) return; S.start=new Date(e.target.value+'T00:00'); renderAll(); });
+$('#tm').addEventListener('click',()=>{ S.n=Math.max(1,S.n-1); renderAll(['budget']); }); $('#tp').addEventListener('click',()=>{ S.n=Math.min(12,S.n+1); renderAll(['budget']); });
+$$('#cit button').forEach(b=>b.addEventListener('click',()=>{ S.cit=+b.dataset.v; $$('#cit button').forEach(x=>x.classList.toggle('on',x===b)); renderAll(['days','budget']); }));
+$$('#cur button').forEach(b=>b.addEventListener('click',()=>{ S.cur=b.dataset.v; $$('#cur button').forEach(x=>x.classList.toggle('on',x===b)); renderAll(); }));
+$('#hour').addEventListener('input',e=>{ S.hour=+e.target.value; renderTraffic(); });
+{ const now=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000); S.hour=now.getHours(); $('#hour').value=S.hour; }
+$('#share').addEventListener('click',()=>{ const u=new URL(location.href); u.search=`?d=${iso(S.start)}&n=${S.n}&c=${S.cit}&cur=${S.cur}&h=${S.hotel}&f=${S.food}&l=${T.legs.map(l=>l.id+':'+S.legs[l.id]).join(',')}`; navigator.clipboard?.writeText(u.toString()); const t=$('#toast'); t.textContent='Link copied'; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),1800); });
+$('#src').innerHTML=T.sources.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join('');
+$$('#cit button').forEach(x=>x.classList.toggle('on',+x.dataset.v===S.cit)); $$('#cur button').forEach(x=>x.classList.toggle('on',x.dataset.v===S.cur));
+renderAll(); live();
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.1}); $$('section > *').forEach(el=>{ el.classList.add('rv'); io.observe(el); });
+})();
+</script>
+</body>
+</html>
