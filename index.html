@@ -280,6 +280,7 @@ footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.grain{display:none}}
 @media print{.bar,.mapwrap,.bg,#embers,.grain,.toast,.btn,.slider,.route,.live,.dio{display:none!important}body{background:#fff;color:#111}section{padding:24px 0}.rv{opacity:1;transform:none}}
 </style>
+<link rel="stylesheet" href="scenes.css">
 </head>
 <body>
 <div class="bg" aria-hidden="true"><div class="b1" data-p="-10"></div><div class="b2"></div><div class="b3"></div><div class="vig"></div></div>
@@ -303,18 +304,15 @@ footer ol{columns:2;column-gap:40px;padding-left:18px;margin:12px 0 20px}footer 
     <div class="tags">History<br>Culture<br>Food<br>People<br>Stories<br><b>You</b><i></i></div>
     <div class="head">
       <div class="eyebrow">A journey through</div>
-      <h1 id="heroTitle">Agra<i class="d" style="background:var(--saffron)"></i>Delhi<i class="d" style="background:var(--teal)"></i>Varanasi</h1>
+      <h1 id="heroTitle">Agra<i class="d" style="background:var(--saffron)"></i>Delhi<br>Varanasi</h1>
       <div class="nights">9 Nights<i></i>10 Days</div>
       <div class="sub">Three cities. A thousand stories.</div>
       <div class="dep" id="sub"></div>
     </div>
     <div class="stamp">Same<br>Roads<br>New<br>Perspective<u></u></div>
   </div>
-  <div class="stage" id="stage">
-    <div class="dio tilt agra" data-p="14" data-city="agra"><img src="img/agra.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Agra diorama: Taj Mahal and Agra Fort" fetchpriority="high"></div>
-    <div class="dio tilt delhi" data-p="8" data-city="delhi"><img src="img/delhi.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Delhi diorama: India Gate, Red Fort, Qutub Minar, Humayun's Tomb" fetchpriority="high"></div>
-    <div class="dio tilt varanasi" data-p="18" data-city="varanasi"><img src="img/varanasi.webp" onerror="this.closest('.dio').remove();document.getElementById('stage').classList.toggle('empty',!document.querySelector('#stage .dio'))" alt="Varanasi diorama: the ghats at dusk"></div>
-    <span class="tag a">Timeless Beauty</span><span class="tag d">Layers of History</span><span class="tag v">Spiritual Rhythm</span>
+  <div class="stage" id="stage" aria-hidden="true">
+    <img src="img/skyline.jpg" alt="" fetchpriority="high" width="2048" height="683">
   </div>
   <p class="lead">The winter edition. Ten days from the last weekend of November into the first week of December: cool mornings, warm afternoons, the year's worst air, and fog that can swallow the Taj until ten. Every hop measured from real coordinates, every fare and timetable checked, every hour rated for smog. Change the date up top and it all re-plans.</p>
   <div class="route" id="route"></div>
@@ -661,5 +659,6 @@ reveal($$('section > *:not(#dayList):not(#legList)')); reveal($$('#dayList > *, 
 setTimeout(()=>$$('.rv:not(.in)').forEach(el=>el.classList.add('in')),3000);
 })();
 </script>
+<script src="scenes.js"></script>
 </body>
 </html>
